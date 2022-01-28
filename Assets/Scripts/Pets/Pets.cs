@@ -9,6 +9,15 @@ public class Pets
     public int ATK;
     public int SPD;
 
+    public int Base_HP =1;
+    public int Base_ATK =1;
+    public int Base_SPD =1;
+
+
+    public Pets()
+    {
+     
+    }
     public Pets(int pID, int pHP, int pATK, int pSPD)
     {
         ID = pID;
@@ -53,6 +62,32 @@ public class Pets
     }
 
 
+
+    public int getBaseHP()
+    {
+        return Base_HP;
+    }
+    public int getBaseATK()
+    {
+        return Base_ATK;
+    }
+    public int getBaseSPD()
+    {
+        return Base_SPD;
+    }
+
+    public void setBaseHP(int pHP)
+    {
+        Base_HP = pHP;
+    }
+    public void setBaseATK(int pATK)
+    {
+        Base_ATK = pATK;
+    }
+    public void setBaseSPD(int pSPD)
+    {
+        Base_SPD = pSPD;
+    }
 
 
 }
