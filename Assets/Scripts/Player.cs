@@ -5,17 +5,27 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    
+    Pets[] roster = new Pets[5];
+    
 
-    Winnie w1 = new Winnie();
+    private void Awake()
+    {
+        roster[0] = new Winnie();
+        roster[1] = new NutCracker();
+        roster[2] = new Winnie();
+        roster[3] = new NutCracker();
+        roster[4] = new Winnie();
+    }
     
 
     public void Start()
     {
-        w1.getATK();
-        //SPD_HUD.instance.spd = w1.getSPD();
-        //ATK_HUD.instance.atk = w1.getATK();
-        //HP_HUD.instance.hp = w1.getHP();
-        Spawner.instance.createPet("Pet_OBJ/Winnie_Prefab");
+        Player_Spawner.instance.createPet(roster[0].getPrefab());
+        Player_Spawner.instance.createPet(roster[1].getPrefab());
+        Player_Spawner.instance.createPet(roster[2].getPrefab());
+        Player_Spawner.instance.createPet(roster[3].getPrefab());
+        Player_Spawner.instance.createPet(roster[4].getPrefab());
     }
 
 

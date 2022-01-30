@@ -14,6 +14,8 @@ public class Pets
     public int Base_ATK = 1;
     public int Base_SPD = 1;
 
+    public string prefab;
+
     public Pets()
     {
 
@@ -91,5 +93,15 @@ public class Pets
         Base_SPD = pSPD;
     }
 
-    
+    public string getPrefab()
+    {
+        return prefab;
+    }
+
+    public void setPrefab(string pFAB)
+    {
+        prefab = pFAB;
+    }
+
+
 }

@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 
-public class Winnie : Pets
+public class NutCracker : Pets
 {
 
-    public int[] stats = new int[] {1, 3, 1, 5};
+    public int[] stats = new int[] { 2, 4, 3, 2 };
 
-    public Winnie() : base()
+    public NutCracker() : base()
     {
-        
+
         base.setID(stats[0]);
         base.setBaseATK(stats[1]);
         base.setBaseSPD(stats[2]);
@@ -20,8 +20,8 @@ public class Winnie : Pets
         base.setATK(base.getBaseATK());
         base.setSPD(base.getBaseSPD());
 
-        base.setPrefab("Pet_OBJ/Winnie_Prefab");
+        base.setPrefab("Pet_OBJ/NutCracker_Prefab");
 
-}
+    }
 
 }
