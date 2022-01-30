@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class HP_HUD : MonoBehaviour
 {
-    private int hp = 9;
+    public int hp;
     public Text hpText;
 
-    void Update()
-    {
-        hpText.text = hp.ToString();
+    public static HP_HUD instance;
+    public void Awake() => instance = this;
 
-        if (Input.GetKeyDown(KeyCode.Y))
-            hp--;  
+    void Update()
+    { 
+        hpText.text = hp.ToString();
     }
 }

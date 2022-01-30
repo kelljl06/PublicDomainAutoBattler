@@ -1,23 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
 
-    void Start()
+    Winnie w1 = new Winnie();
+    
+
+    public void Start()
     {
-        Winnie winnie = new Winnie();
-        //Pet_HUD HUD = new Pet_HUD();
-
-        int HP = winnie.getHP();
-        int ATK = winnie.getATK();
-        int SPD = winnie.getSPD();
-
-        //HUD.updateHPHUD(10);
-
-        //HUD.updateHPHUD(HP);
-        //HUD.updateATKHUD(ATK);
-        //HUD.updateSPDHUD(SPD);
+        w1.getATK();
+        //SPD_HUD.instance.spd = w1.getSPD();
+        //ATK_HUD.instance.atk = w1.getATK();
+        //HP_HUD.instance.hp = w1.getHP();
+        Spawner.instance.createPet("Pet_OBJ/Winnie_Prefab");
     }
+
+
 }

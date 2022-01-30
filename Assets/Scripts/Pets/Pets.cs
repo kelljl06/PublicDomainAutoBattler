@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Pets
 {
@@ -9,15 +10,16 @@ public class Pets
     public int ATK;
     public int SPD;
 
-    public int Base_HP =1;
-    public int Base_ATK =1;
-    public int Base_SPD =1;
-
+    public int Base_HP = 1;
+    public int Base_ATK = 1;
+    public int Base_SPD = 1;
 
     public Pets()
     {
-     
+
     }
+    
+
     public Pets(int pID, int pHP, int pATK, int pSPD)
     {
         ID = pID;
@@ -58,7 +60,7 @@ public class Pets
     }
     public void setSPD(int pSPD)
     {
-        ID = SPD;
+        SPD = pSPD;
     }
 
 
@@ -89,5 +91,5 @@ public class Pets
         Base_SPD = pSPD;
     }
 
-
+    
 }

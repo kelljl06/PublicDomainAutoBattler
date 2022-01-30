@@ -6,18 +6,23 @@ using System.Collections;
 public class Winnie : Pets
 {
 
-    public int[] stats = new int[] {1, 30, 10, 50};
+    public int[] stats = new int[] {1, 3, 1, 5};
+
+    
+
 
     public Winnie() : base()
     {
-
-        base.setID(stats[0]);
-        base.setBaseHP(stats[1]);
-        base.setBaseATK(stats[3]);
-        base.setBaseSPD(stats[2]);
         
+        base.setID(stats[0]);
+        base.setBaseATK(stats[1]);
+        base.setBaseSPD(stats[2]);
+        base.setBaseHP(stats[3]);
+
         base.setHP(base.getBaseHP());
         base.setATK(base.getBaseATK());
         base.setSPD(base.getBaseSPD());
+        
     }
+
 }

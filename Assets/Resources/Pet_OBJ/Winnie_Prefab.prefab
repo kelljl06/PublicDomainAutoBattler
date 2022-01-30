@@ -507,7 +507,7 @@ GameObject:
   - component: {fileID: 7860017803869428560}
   - component: {fileID: 7860017803869428575}
   m_Layer: 0
-  m_Name: Winnie
+  m_Name: Winnie_Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
