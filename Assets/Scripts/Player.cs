@@ -26,6 +26,9 @@ public class Player : MonoBehaviour
         Player_Spawner.instance.createPet(roster[2].getPrefab());
         Player_Spawner.instance.createPet(roster[3].getPrefab());
         Player_Spawner.instance.createPet(roster[4].getPrefab());
+
+
+        Player_Spawner.instance.updateHP(roster[0]);
     }
 
 

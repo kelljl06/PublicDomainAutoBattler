@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player_Spawner : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class Player_Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     public void createPet(string name) {
@@ -33,5 +34,12 @@ public class Player_Spawner : MonoBehaviour
         Instantiate(pet, playerPositions[order], transform.rotation);
         order++;
     }
+
+    public void updateHP(Pets pet)
+    {
+        
+    }
+
+
 
 }
