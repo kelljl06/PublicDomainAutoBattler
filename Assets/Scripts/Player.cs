@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class Player : MonoBehaviour
 {
@@ -52,8 +53,14 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.T))
+        {
+            StartCoroutine(waitFor(10f));
+            StartCoroutine(waitFor(1f, drestoryDeadPlayerPet));
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
         {
             playerHitAna();
             oppHitAna();
@@ -80,26 +87,18 @@ public class Player : MonoBehaviour
             //Check to see if your lineups has a dead Pet
             if (Battle.instance.checkDead(roster[0]))
             {
-                GameObject.Destroy(rosterOBJ[0]);
-                rosterOBJ.RemoveAt(0);
-                roster.RemoveAt(0);
 
-                foreach (GameObject n in rosterOBJ)
-                {
-                    StartCoroutine(MoveOverSeconds(n, n.transform.position + new Vector3(1.7f, 0, 0), MOVE_SPEED));
-                }
+                StartCoroutine(waitFor(.3f, drestoryDeadPlayerPet));
+
+                StartCoroutine(waitFor(.5f, movePlayerTeam));
             }
             //Check to see if opponent lineups has a dead Pet
             if (Battle.instance.checkDead(rosterOpp[0]))
             {
-                GameObject.Destroy(opponentOBJ[0]);
-                opponentOBJ.RemoveAt(0);
-                rosterOpp.RemoveAt(0);
+                StartCoroutine(waitFor(.3f, drestoryDeadOppPet));
 
-                foreach (GameObject n in opponentOBJ)
-                {
-                    StartCoroutine(MoveOverSeconds(n, n.transform.position + new Vector3(-1.7f, 0, 0), MOVE_SPEED));
-                }
+                StartCoroutine(waitFor(.5f, moveOppTeam));
+                
             }
 
 
@@ -118,17 +117,19 @@ public class Player : MonoBehaviour
 
     }
 
-    public IEnumerator MoveOverSeconds(GameObject objectToMove, Vector3 end, float seconds)
+    public void drestoryDeadPlayerPet()
     {
-        float elapsedTime = 0;
-        Vector3 startingPos = objectToMove.transform.position;
-        while (elapsedTime < seconds)
-        {
-            objectToMove.transform.position = Vector3.Lerp(startingPos, end, (elapsedTime / seconds));
-            elapsedTime += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
-        }
-        objectToMove.transform.position = end;
+        //StartCoroutine(MoveOverSeconds(rosterOBJ[0], new Vector3(10f, 10f, 0), .7f));
+        GameObject.Destroy(rosterOBJ[0]);
+        rosterOBJ.RemoveAt(0);
+        roster.RemoveAt(0);
+    }
+    public void drestoryDeadOppPet()
+    {
+        
+        GameObject.Destroy(opponentOBJ[0]);
+        opponentOBJ.RemoveAt(0);
+        rosterOpp.RemoveAt(0);
     }
 
     public void playerHitAna()
@@ -143,6 +144,37 @@ public class Player : MonoBehaviour
         GameObject toHit2 = opponentOBJ[0];
         StartCoroutine(HitOverSeconds(toHit2, toHit2.transform.position + new Vector3(-1f, 0, 0), ATTACK_SPEED));
     }
+
+    public void movePlayerTeam()
+    {
+        foreach (GameObject n in rosterOBJ)
+        {
+            StartCoroutine(MoveOverSeconds(n, n.transform.position + new Vector3(1.7f, 0, 0), MOVE_SPEED));
+        }
+    }
+
+    public void moveOppTeam()
+    {
+        foreach (GameObject n in opponentOBJ)
+        {
+            StartCoroutine(MoveOverSeconds(n, n.transform.position + new Vector3(-1.7f, 0, 0), MOVE_SPEED));
+        }
+    }
+
+    public IEnumerator MoveOverSeconds(GameObject objectToMove, Vector3 end, float seconds)
+    {
+        float elapsedTime = 0;
+        Vector3 startingPos = objectToMove.transform.position;
+        while (elapsedTime < seconds)
+        {
+            objectToMove.transform.position = Vector3.Lerp(startingPos, end, (elapsedTime / seconds));
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        objectToMove.transform.position = end;
+    }
+
+
 
     public IEnumerator HitOverSeconds(GameObject objectToMove, Vector3 end, float seconds)
     {
@@ -179,5 +211,15 @@ public class Player : MonoBehaviour
         objectToMove.transform.position = end;
     }
 
+    public IEnumerator waitFor(float time)
+    {
+        Debug.Log("ajsd");
+        yield return new WaitForSeconds(time);
+    }
+    public IEnumerator waitFor(float time, Action act)
+    {
+        yield return new WaitForSeconds(time);
+        act();
+    }
 
 }
