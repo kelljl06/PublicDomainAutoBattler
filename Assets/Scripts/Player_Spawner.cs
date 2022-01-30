@@ -31,12 +31,23 @@ public class Player_Spawner : MonoBehaviour
 
     public GameObject createPet(string name) {
         pet = Resources.Load(name) as GameObject;
+
+        
         return Spawn(pet);
     }
 
 
     public GameObject Spawn(GameObject ppet) {
-        GameObject tempPet = Instantiate(ppet, playerPositions[order], transform.rotation);
+
+        GameObject tempPet;
+        
+        tempPet = Instantiate(ppet, playerPositions[order], transform.localRotation);
+
+        if (order > 4)
+        {
+            tempPet.GetComponent<SpriteRenderer>().flipX = true;
+        }
+
         order++;
         return tempPet;
     }
