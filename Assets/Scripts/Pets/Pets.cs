@@ -28,6 +28,11 @@ public class Pets
         SPD = pSPD;
     }
 
+    override public string ToString()
+    {
+        return "("+ID.ToString()+","+ATK.ToString()+","+SPD.ToString()+","+HP.ToString()+")";
+    }
+
 
     public int getID()
     {
