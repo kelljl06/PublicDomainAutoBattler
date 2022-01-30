@@ -13,7 +13,12 @@ public class Player_Spawner : MonoBehaviour
                             new Vector3 { x = -2.7f, y = -2, z = 0},
                             new Vector3 { x = -4.4f, y = -2, z = 0},
                             new Vector3 { x = -6.1f, y = -2, z = 0},
-                            new Vector3 { x = -7.8f, y = -2, z = 0}
+                            new Vector3 { x = -7.8f, y = -2, z = 0},
+                            new Vector3 { x = 1f, y = -2, z = 0 },
+                            new Vector3 { x = 2.7f, y = -2, z = 0},
+                            new Vector3 { x = 4.4f, y = -2, z = 0},
+                            new Vector3 { x = 6.1f, y = -2, z = 0},
+                            new Vector3 { x = 7.8f, y = -2, z = 0}
      };
 
     public int order = 0;
