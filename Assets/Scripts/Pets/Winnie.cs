@@ -16,9 +16,10 @@ public class Winnie : Pets
         base.setBaseSPD(stats[2]);
         base.setBaseHP(stats[3]);
 
-        base.setHP(base.getBaseHP());
+        
         base.setATK(base.getBaseATK());
         base.setSPD(base.getBaseSPD());
+        base.setHP(base.getBaseHP());
 
         base.setPrefab("Pet_OBJ/Winnie_Prefab");
 

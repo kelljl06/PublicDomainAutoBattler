@@ -24,20 +24,24 @@ public class Player_Spawner : MonoBehaviour
 
     }
 
-    public void createPet(string name) {
+    public GameObject createPet(string name) {
         pet = Resources.Load(name) as GameObject;
-        Spawn(pet);
+        return Spawn(pet);
     }
 
 
-    public void Spawn(GameObject pet) {
-        Instantiate(pet, playerPositions[order], transform.rotation);
+    public GameObject Spawn(GameObject ppet) {
+        GameObject tempPet = Instantiate(ppet, playerPositions[order], transform.rotation);
         order++;
+        return tempPet;
     }
 
-    public void updateHP(Pets pet)
+    public void updateHP(GameObject charac, int ATK, int SPD, int HP)
     {
-        
+        Text[] test = charac.GetComponentsInChildren<Text>();
+        test[0].text = ATK.ToString();
+        test[1].text = SPD.ToString();
+        test[2].text = HP.ToString();
     }
 
 

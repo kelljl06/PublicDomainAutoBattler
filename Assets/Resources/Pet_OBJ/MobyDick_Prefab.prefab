@@ -177,7 +177,6 @@ GameObject:
   - component: {fileID: 1129503678927606604}
   - component: {fileID: 1129503678927606606}
   - component: {fileID: 1129503678927606605}
-  - component: {fileID: 1129503678927606607}
   m_Layer: 5
   m_Name: SPD_Text
   m_TagString: Untagged
@@ -246,20 +245,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 1
---- !u!114 &1129503678927606607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1129503678927606595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02976487e162d54449712b34e83bd0ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spd: 0
-  spdText: {fileID: 1129503678927606605}
 --- !u!1 &1129503679218678231
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,9 +423,6 @@ GameObject:
   - component: {fileID: 1129503680098399029}
   - component: {fileID: 1129503680098399028}
   - component: {fileID: 1129503680098399051}
-  - component: {fileID: 1129503680098399030}
-  - component: {fileID: 1129503680098399031}
-  - component: {fileID: 1129503680098399024}
   m_Layer: 5
   m_Name: Canvas_PetStats
   m_TagString: Untagged
@@ -531,48 +513,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1129503680098399030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1129503680098399049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cec7d7b52d65a254dbdccd02b62733b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 0
-  hpText: {fileID: 1129503680261411055}
---- !u!114 &1129503680098399031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1129503680098399049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1240c83b144bec140b39d59f5d12eca2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  atk: 0
-  atkText: {fileID: 1129503680634661636}
---- !u!114 &1129503680098399024
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1129503680098399049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02976487e162d54449712b34e83bd0ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spd: 0
-  spdText: {fileID: 1129503678927606605}
 --- !u!1 &1129503680261411053
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,7 +524,6 @@ GameObject:
   - component: {fileID: 1129503680261411054}
   - component: {fileID: 1129503680261411048}
   - component: {fileID: 1129503680261411055}
-  - component: {fileID: 1129503680261411049}
   m_Layer: 5
   m_Name: HP_Text
   m_TagString: Untagged
@@ -653,20 +592,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 1
---- !u!114 &1129503680261411049
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1129503680261411053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cec7d7b52d65a254dbdccd02b62733b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 0
-  hpText: {fileID: 1129503680261411055}
 --- !u!1 &1129503680634661658
 GameObject:
   m_ObjectHideFlags: 0
@@ -678,7 +603,6 @@ GameObject:
   - component: {fileID: 1129503680634661659}
   - component: {fileID: 1129503680634661637}
   - component: {fileID: 1129503680634661636}
-  - component: {fileID: 1129503680634661639}
   m_Layer: 5
   m_Name: ATK_Text
   m_TagString: Untagged
@@ -747,17 +671,3 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 1
---- !u!114 &1129503680634661639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1129503680634661658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1240c83b144bec140b39d59f5d12eca2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  atk: 0
-  atkText: {fileID: 1129503680634661636}
