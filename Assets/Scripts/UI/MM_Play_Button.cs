@@ -5,8 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MM_Play_Button : MonoBehaviour
-{
 
+{
     public Button playButton;
 
     void Start()

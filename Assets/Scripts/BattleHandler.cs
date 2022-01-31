@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public class BattleHandler : MonoBehaviour
 {
@@ -19,11 +20,12 @@ public class BattleHandler : MonoBehaviour
     {
 
         //Add Your Roster
-        roster.Add(new Winnie());
-        roster.Add(new NutCracker());
-        roster.Add(new MobyDick());
-        roster.Add(new NutCracker());
-        roster.Add(new Tarzan());
+        roster.Add(Player.instance.getWithinIndex(0));
+        roster.Add(Player.instance.getWithinIndex(1));
+        roster.Add(Player.instance.getWithinIndex(2));
+        roster.Add(Player.instance.getWithinIndex(3));
+        roster.Add(Player.instance.getWithinIndex(4));
+
 
         //Add Opponent Roster
         rosterOpp.Add(new Jesus());
@@ -54,13 +56,6 @@ public class BattleHandler : MonoBehaviour
     void Update()
     {
 
-        //Test Key
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            Player_Spawner.instance.createClash();
-
-        }
-
         //Only Battle on Y Key Press
         if (Input.GetKeyDown(KeyCode.Y))
         {
@@ -69,6 +64,7 @@ public class BattleHandler : MonoBehaviour
             if (rosterOBJ.Count == 0 | opponentOBJ.Count == 0)
             {
                 Debug.Log("Game is Finished");
+                SceneManager.LoadScene("ShopUI", LoadSceneMode.Single);
                 return;
             }
             else
