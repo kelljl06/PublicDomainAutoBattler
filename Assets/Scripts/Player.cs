@@ -7,7 +7,6 @@ using System;
 public class Player : MonoBehaviour
 {
 
-
     public float MOVE_SPEED = .3f;
     public float ATTACK_SPEED = .1f;
 
@@ -18,6 +17,7 @@ public class Player : MonoBehaviour
         
     private void Awake()
     {
+
         //Add Your Roster
         roster.Add(new Winnie());
         roster.Add(new NutCracker());
@@ -55,8 +55,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            StartCoroutine(waitFor(10f));
-            StartCoroutine(waitFor(1f, drestoryDeadPlayerPet));
+            Player_Spawner.instance.createClash();
 
         }
 
@@ -213,7 +212,6 @@ public class Player : MonoBehaviour
 
     public IEnumerator waitFor(float time)
     {
-        Debug.Log("ajsd");
         yield return new WaitForSeconds(time);
     }
     public IEnumerator waitFor(float time, Action act)

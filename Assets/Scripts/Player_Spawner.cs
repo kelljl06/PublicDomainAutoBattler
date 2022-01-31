@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class Player_Spawner : MonoBehaviour
 {
     public GameObject pet;
+    public GameObject jake;
     public static Player_Spawner instance;
+
     public void Awake() => instance = this;
 
     Vector3[] playerPositions = { new Vector3 { x = -1f, y = -2, z = 0 },
@@ -28,11 +31,15 @@ public class Player_Spawner : MonoBehaviour
     {
 
     }
+    public void createClash() {
+        jake = Resources.Load("UI/HitImage") as GameObject;
+        jake = Instantiate(jake, new Vector3(0, -2f, 0), transform.localRotation);
+        StartCoroutine(deleteClash(.2f));
+    }
 
     public GameObject createPet(string name) {
         pet = Resources.Load(name) as GameObject;
 
-        
         return Spawn(pet);
     }
 
@@ -58,6 +65,13 @@ public class Player_Spawner : MonoBehaviour
         test[0].text = ATK.ToString();
         test[1].text = SPD.ToString();
         test[2].text = HP.ToString();
+    }
+
+    public IEnumerator deleteClash(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        GameObject.Destroy(jake);
     }
 
 

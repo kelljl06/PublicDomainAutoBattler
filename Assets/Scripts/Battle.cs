@@ -22,6 +22,8 @@ public class Battle : MonoBehaviour
         Pets pet1 = player[0];
         Pets pet2 = opponent[0];
 
+        Player_Spawner.instance.createClash();
+
         //Check which pet is faster and have it hit first
         if (pet1.getSPD() > pet2.getSPD())
         {
@@ -47,11 +49,13 @@ public class Battle : MonoBehaviour
             mutualHit(pet1, pet2);
             
         }
+
     }
 
     //Remove HP equal to other pets attack
     public void hit(Pets pet1, Pets pet2, bool playerHit)
     {
+        
         if (playerHit)
         {
             playerClass.playerHitAna();
@@ -65,6 +69,7 @@ public class Battle : MonoBehaviour
     //If hitting at the same time do both
     public void mutualHit(Pets pet1, Pets pet2)
     {
+
         pet2.setHP(pet2.getHP() - pet1.getATK());
         pet1.setHP(pet1.getHP() - pet2.getATK());
 
