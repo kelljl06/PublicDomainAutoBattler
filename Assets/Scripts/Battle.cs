@@ -98,33 +98,3 @@ public class Battle : MonoBehaviour
         }
     }
 }
-/*
- * Debug.Log("Before: " + pet1.ToString() + " , " + pet2.ToString());
-            if (checkDead(pet1) | checkDead(pet2))
-            {
-                return;
-            }
-            if (pet1.getSPD() > pet2.getSPD())
-            {
-                hit(pet1, pet2);
-                if (checkDead(pet1) | checkDead(pet2))
-                {
-                    return;
-                }
-                hit(pet2, pet1);
-            }
-            else if (pet1.getSPD() < pet2.getSPD())
-            {
-                hit(pet2, pet1);
-                if (checkDead(pet1) | checkDead(pet2))
-                {
-                    return;
-                }
-                hit(pet1, pet2);
-            }
-            else
-            {
-                mutualHit(pet1, pet2);
-            }
-            Debug.Log("After: " + pet1.ToString() + " , " + pet2.ToString());
- * */

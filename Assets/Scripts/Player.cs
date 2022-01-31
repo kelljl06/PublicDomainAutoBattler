@@ -53,16 +53,11 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
+
+        //Test Key
         if (Input.GetKeyDown(KeyCode.T))
         {
             Player_Spawner.instance.createClash();
-
-        }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            playerHitAna();
-            oppHitAna();
 
         }
 
@@ -88,14 +83,12 @@ public class Player : MonoBehaviour
             {
 
                 StartCoroutine(waitFor(.3f, drestoryDeadPlayerPet));
-
                 StartCoroutine(waitFor(.5f, movePlayerTeam));
             }
             //Check to see if opponent lineups has a dead Pet
             if (Battle.instance.checkDead(rosterOpp[0]))
             {
                 StartCoroutine(waitFor(.3f, drestoryDeadOppPet));
-
                 StartCoroutine(waitFor(.5f, moveOppTeam));
                 
             }
@@ -116,13 +109,15 @@ public class Player : MonoBehaviour
 
     }
 
+    //Destorys the for pet in the player roster
     public void drestoryDeadPlayerPet()
     {
-        //StartCoroutine(MoveOverSeconds(rosterOBJ[0], new Vector3(10f, 10f, 0), .7f));
         GameObject.Destroy(rosterOBJ[0]);
         rosterOBJ.RemoveAt(0);
         roster.RemoveAt(0);
     }
+
+    //Destorys the for pet in the Oppenent roster
     public void drestoryDeadOppPet()
     {
         
@@ -131,6 +126,7 @@ public class Player : MonoBehaviour
         rosterOpp.RemoveAt(0);
     }
 
+    //Called to move the first user pet back and forth to kinda look like its hitting
     public void playerHitAna()
     {
 
@@ -138,12 +134,14 @@ public class Player : MonoBehaviour
         StartCoroutine(HitOverSeconds(toHit, toHit.transform.position + new Vector3(1f, 0, 0), ATTACK_SPEED));
     }
 
+    //Does the same as the code above but for the oppenent
     public void oppHitAna()
     {
         GameObject toHit2 = opponentOBJ[0];
         StartCoroutine(HitOverSeconds(toHit2, toHit2.transform.position + new Vector3(-1f, 0, 0), ATTACK_SPEED));
     }
 
+    //This is called when someone on the player team dies and realigns the rest of the team 
     public void movePlayerTeam()
     {
         foreach (GameObject n in rosterOBJ)
@@ -152,6 +150,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    //This is called when someone on the oppenent team dies and realigns the rest of the team 
     public void moveOppTeam()
     {
         foreach (GameObject n in opponentOBJ)
@@ -160,6 +159,8 @@ public class Player : MonoBehaviour
         }
     }
 
+
+    //This function moves a unit to a new location over time
     public IEnumerator MoveOverSeconds(GameObject objectToMove, Vector3 end, float seconds)
     {
         float elapsedTime = 0;
@@ -174,7 +175,7 @@ public class Player : MonoBehaviour
     }
 
 
-
+    //THus moves the player forward then right back to simulate a hit
     public IEnumerator HitOverSeconds(GameObject objectToMove, Vector3 end, float seconds)
     {
         float elapsedTime = 0;
@@ -197,6 +198,7 @@ public class Player : MonoBehaviour
 
     }
 
+    //Deadass dont remember but seems useful and it some lerp movement function
     public IEnumerator HitImageSpawn(GameObject objectToMove, Vector3 end, float seconds)
     {
         float elapsedTime = 0;
@@ -210,10 +212,14 @@ public class Player : MonoBehaviour
         objectToMove.transform.position = end;
     }
 
+
+    //This function simply acts as a timer
     public IEnumerator waitFor(float time)
     {
         yield return new WaitForSeconds(time);
     }
+
+    //This takes a float and a function and calls the funtion after an amount of time
     public IEnumerator waitFor(float time, Action act)
     {
         yield return new WaitForSeconds(time);
