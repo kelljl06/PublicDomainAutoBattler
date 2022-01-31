@@ -11,6 +11,8 @@ public class Battle : MonoBehaviour
     public bool isPlayersTurn;
     public bool inTurn = false;
 
+    public const int TIRED = 2;
+
 
     public void Awake() => instance = this;
 
@@ -68,8 +70,32 @@ public class Battle : MonoBehaviour
             mutualHit(pet1, pet2);
             inTurn = false;
         }
+        if (checkDead(pet1, pet2))
+        {
+            inTurn = false;
+            if (checkDead(pet1) && checkDead(pet2)) {
+                return;
+            }
+
+            else if (checkDead(pet1)) {
+                int newPetSpeed = pet2.getSPD() - TIRED;
+                if (newPetSpeed < 0)
+                    newPetSpeed = 0;
+                pet2.setSPD(newPetSpeed);
+            } 
+            else if (checkDead(pet2)) {
+                int newPetSpeed = pet1.getSPD() - TIRED;
+                if (newPetSpeed < 0)
+                    newPetSpeed = 0;
+                pet1.setSPD(newPetSpeed);
+            }
+        }
+            
+        
 
     }
+
+
 
     //Remove HP equal to other pets attack
     public void hit(Pets pet1, Pets pet2, bool playerHit)

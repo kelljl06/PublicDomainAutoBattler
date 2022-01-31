@@ -23,11 +23,11 @@ public class BattleHandler : MonoBehaviour
         roster.Add(new NutCracker());
         roster.Add(new MobyDick());
         roster.Add(new NutCracker());
-        roster.Add(new Winnie());
+        roster.Add(new Tarzan());
 
         //Add Opponent Roster
-        rosterOpp.Add(new NutCracker());
-        rosterOpp.Add(new Winnie());
+        rosterOpp.Add(new Jesus());
+        rosterOpp.Add(new MobyDick());
         rosterOpp.Add(new NutCracker());
         rosterOpp.Add(new Winnie());
         rosterOpp.Add(new NutCracker());
