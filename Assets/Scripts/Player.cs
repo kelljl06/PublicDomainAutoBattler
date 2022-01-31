@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
         //Add Your Roster
         roster.Add(new Winnie());
         roster.Add(new NutCracker());
-        roster.Add(new Winnie());
+        roster.Add(new MobyDick());
         roster.Add(new NutCracker());
         roster.Add(new Winnie());
 

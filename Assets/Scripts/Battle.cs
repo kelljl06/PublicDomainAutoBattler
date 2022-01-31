@@ -8,6 +8,10 @@ public class Battle : MonoBehaviour
 
     public Player playerClass;
 
+    public bool isPlayersTurn;
+    public bool inTurn = false;
+
+
     public void Awake() => instance = this;
 
     private void Start()
@@ -24,30 +28,45 @@ public class Battle : MonoBehaviour
 
         Player_Spawner.instance.createClash();
 
+
         //Check which pet is faster and have it hit first
-        if (pet1.getSPD() > pet2.getSPD())
+        if (pet1.getSPD() != pet2.getSPD())
         {
-            hit(pet1, pet2, true);
-            //Check so dead pet does not attack
-            if (checkDead(pet1, pet2))
-                return;
-            hit(pet2, pet1, false);
-            
+            if (!inTurn)
+            {
+                if (pet1.getSPD() > pet2.getSPD())
+                {
+                    isPlayersTurn = true;
+
+                }
+                else if (pet1.getSPD() < pet2.getSPD())
+                {
+                    isPlayersTurn = false;
+                }
+                inTurn = true;
+            }
+            else
+            {
+                inTurn = false;
+            }
+
+            if (isPlayersTurn)
+            {
+                hit(pet1, pet2, true);
+                //Check so dead pet does not attack
+                isPlayersTurn = false;
+            }
+            else
+            {
+                hit(pet2, pet1, false);
+                //Check so dead pet does not attack
+                isPlayersTurn = true;
+
+            }
         }
-        else if (pet1.getSPD() < pet2.getSPD())
-        {
-            hit(pet2, pet1, false);
-            //Check so dead pet does not attack
-            if (checkDead(pet1, pet2))
-                return;
-            hit(pet1, pet2, true);
-            
-        }
-        else
-        {
-            //Hit each other
+        else {
             mutualHit(pet1, pet2);
-            
+            inTurn = false;
         }
 
     }

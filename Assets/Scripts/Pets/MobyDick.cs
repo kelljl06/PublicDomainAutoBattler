@@ -3,25 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 
-public class Winnie : Pets
+public class MobyDick : Pets
 {
 
-    public int[] stats = new int[] {1, 3, 1, 5};
+    public int[] stats = new int[] { 1, 5, 1, 7 };
 
-    public Winnie() : base()
+    public MobyDick() : base()
     {
-        
+
         base.setID(stats[0]);
         base.setBaseATK(stats[1]);
         base.setBaseSPD(stats[2]);
         base.setBaseHP(stats[3]);
 
-        
+
         base.setATK(base.getBaseATK());
         base.setSPD(base.getBaseSPD());
         base.setHP(base.getBaseHP());
 
-        base.setPrefab("Pet_OBJ/Winnie_Prefab");
+        base.setPrefab("Pet_OBJ/MobyDick_Prefab");
 
     }
 
