@@ -6,7 +6,7 @@ public class Battle : MonoBehaviour
 {
     public static Battle instance;
 
-    public Player playerClass;
+    public BattleHandler battleHandlerClass;
 
     public bool isPlayersTurn;
     public bool inTurn = false;
@@ -16,7 +16,7 @@ public class Battle : MonoBehaviour
 
     private void Start()
     {
-        playerClass = GetComponent<Player>();
+        battleHandlerClass = GetComponent<BattleHandler>();
     }
 
     //Battles the two lineups
@@ -77,10 +77,10 @@ public class Battle : MonoBehaviour
         
         if (playerHit)
         {
-            playerClass.playerHitAna();
+            battleHandlerClass.playerHitAna();
         }
         else {
-            playerClass.oppHitAna();
+            battleHandlerClass.oppHitAna();
         }
         pet2.setHP(pet2.getHP() - pet1.getATK());   
     }
@@ -92,8 +92,8 @@ public class Battle : MonoBehaviour
         pet2.setHP(pet2.getHP() - pet1.getATK());
         pet1.setHP(pet1.getHP() - pet2.getATK());
 
-        playerClass.playerHitAna();
-        playerClass.oppHitAna();
+        battleHandlerClass.playerHitAna();
+        battleHandlerClass.oppHitAna();
     }
      
     //If pet has 0 health set all stats to 0

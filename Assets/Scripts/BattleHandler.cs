@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class Player : MonoBehaviour
+public class BattleHandler : MonoBehaviour
 {
 
     public float MOVE_SPEED = .3f;
