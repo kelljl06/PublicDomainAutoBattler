@@ -22,22 +22,23 @@ public class ShopHandler : MonoBehaviour
     public int orderPlayer;
     public int rand;
 
-    Vector3[] shopPositions = { 
-                            new Vector3 { x = -6.3f, y = -2, z = 0 },
-                            new Vector3 { x = -3.1f, y = -2, z = 0},
-                            new Vector3 { x = 0f, y = -2, z = 0},
-                            new Vector3 { x = 3.1f, y = -2, z = 0},
-                            new Vector3 { x = 6.3f, y = -2, z = 0},
+    Vector3[] shopPositions = {
+        new Vector3 { x = 6.3f, y = -2, z = 0},
+        new Vector3 { x = 3.1f, y = -2, z = 0},
+        new Vector3 { x = 0f, y = -2, z = 0},
+        new Vector3 { x = -3.1f, y = -2, z = 0},
+        new Vector3 { x = -6.3f, y = -2, z = 0 },
 
      };
 
     Vector3[] playerPositions = {
-                            new Vector3 { x = -6.3f, y = 2.3f, z = 0 },
-                            new Vector3 { x = -3.1f, y = 2.3f, z = 0},
-                            new Vector3 { x = 0f, y = 2.3f, z = 0},
-                            new Vector3 { x = 3.1f, y = 2.3f, z = 0},
-                            new Vector3 { x = 6.3f, y = 2.3f, z = 0},
 
+        new Vector3 { x = 6.3f, y = 2.3f, z = 0},
+        new Vector3 { x = 3.1f, y = 2.3f, z = 0},
+        new Vector3 { x = 0f, y = 2.3f, z = 0},
+        new Vector3 { x = -3.1f, y = 2.3f, z = 0},
+        new Vector3 { x = -6.3f, y = 2.3f, z = 0 },                         
+                            
      };
 
 
@@ -54,6 +55,8 @@ public class ShopHandler : MonoBehaviour
         possiblePets.Add(new NutCracker());
         possiblePets.Add(new Jesus());
         possiblePets.Add(new Tarzan());
+        possiblePets.Add(new Death());
+        possiblePets.Add(new Bozo());
 
         LoadPlayerPets();
         ShopRefresh();
@@ -76,7 +79,7 @@ public class ShopHandler : MonoBehaviour
     public void ShopRefresh() {
         ClearShop();
         
-        for (int i = 0; possiblePets.Count > i; i++) {
+        for (int i = 0; 5 > i; i++) {
             rand = Random.Range(0, possiblePets.Count);
             shopPets.Add(createPet(possiblePets[rand].getPrefab(), false));
             shopPetsClass.Add(possiblePets[rand]);
@@ -90,7 +93,6 @@ public class ShopHandler : MonoBehaviour
         orderShop = 0;
         while (shopPets.Count > 0)
         {
-            Debug.Log("1111111111");
             GameObject.Destroy(shopPets[0]);
             shopPets.RemoveAt(0);
             shopPetsClass.RemoveAt(0);
@@ -103,7 +105,6 @@ public class ShopHandler : MonoBehaviour
     {
         ClearPets();
         for (int i = 0; i < Player.instance.getHand().Count; i++) {
-            Debug.Log("Load Pet "+ i);
             PlayerPets.Add(createPet(Player.instance.getWithinIndex(i).getPrefab(), true));
             updateStats(PlayerPets[i], Player.instance.getWithinIndex(i).getATK(),
                 Player.instance.getWithinIndex(i).getSPD(), Player.instance.getWithinIndex(i).getHP());
@@ -142,5 +143,18 @@ public class ShopHandler : MonoBehaviour
         }
 
         return tempPet;
+    }
+
+    public void PurchasePet(int petPicked,int place)
+    {
+        Debug.Log(""+ Player.instance.getHand().Count);
+
+        if (place > Player.instance.getHand().Count)
+            Player.instance.setWithinIndex(shopPetsClass[petPicked], Player.instance.getHand().Count);
+        else
+            Player.instance.setWithinIndex(shopPetsClass[petPicked], place);
+
+        ShopHandler.instance.LoadPlayerPets();
+
     }
 }

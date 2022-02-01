@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 
-public class Tarzan : Pets
+public class Death : Pets
 {
 
-    public int[] stats = new int[] { 4, 1, 9, 3 };
+    public int[] stats = new int[] { 6, 5, 0, 5 };
 
-    public Tarzan() : base()
+    public Death() : base()
     {
 
         base.setID(stats[0]);
@@ -21,7 +21,7 @@ public class Tarzan : Pets
         base.setSPD(base.getBaseSPD());
         base.setHP(base.getBaseHP());
 
-        base.setPrefab("Pet_OBJ/Tarzan_Prefab");
+        base.setPrefab("Pet_OBJ/Death_Prefab");
 
     }
 

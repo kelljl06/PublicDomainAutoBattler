@@ -21,6 +21,10 @@ public class Player : MonoBehaviour
         return PlayerHand;
     }
 
+    public void setHand(List<Pets> petArray) {
+        PlayerHand = petArray;
+    }
+
     public Pets getWithinIndex(int index) {
         return PlayerHand[index];
     }
