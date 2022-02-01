@@ -16,13 +16,22 @@ public class Player : MonoBehaviour
         instance = this;
     }
 
+    public List<Pets> getHand()
+    {
+        return PlayerHand;
+    }
+
     public Pets getWithinIndex(int index) {
         return PlayerHand[index];
     }
 
     public void setWithinIndex(Pets pet, int index)
     {
+        if (index < PlayerHand.Count)
+            PlayerHand.RemoveAt(index);
         PlayerHand.Insert(index, pet);
+
+        Debug.Log("HandCount "+ PlayerHand.Count );
     }
 
 
