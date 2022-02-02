@@ -26,7 +26,7 @@ public class BattleHandler : MonoBehaviour
         }
 
         //Add Opponent Roster
-        rosterOpp.Add(new Jesus());
+        rosterOpp.Add(new NutCracker());
         rosterOpp.Add(new MobyDick());
         rosterOpp.Add(new NutCracker());
         rosterOpp.Add(new Winnie());
@@ -70,23 +70,29 @@ public class BattleHandler : MonoBehaviour
                 //Battle the two lineups   
                 Battle.instance.battle(roster, rosterOpp);
             }
-            
+
 
             //Check to see if your lineups has a dead Pet
-            if (Battle.instance.checkDead(roster[0]))
+            for (int i = 0; i < roster.Count; i++)
             {
-
-                StartCoroutine(waitFor(.3f, drestoryDeadPlayerPet));
-                StartCoroutine(waitFor(.5f, movePlayerTeam));
+                if (Battle.instance.checkDead(roster[i]))
+                {
+                    roster[0].onDeath(roster, rosterOpp);
+                    StartCoroutine(waitFor(.3f, drestoryDeadPlayerPet));
+                    StartCoroutine(waitFor(.5f, movePlayerTeam));
+                }
             }
             //Check to see if opponent lineups has a dead Pet
-            if (Battle.instance.checkDead(rosterOpp[0]))
+            for (int i = 0; i < rosterOpp.Count; i++)
             {
-                StartCoroutine(waitFor(.3f, drestoryDeadOppPet));
-                StartCoroutine(waitFor(.5f, moveOppTeam));
-                
-            }
+                if (Battle.instance.checkDead(rosterOpp[i]))
+                {
+                    rosterOpp[0].onDeath(roster, rosterOpp);
+                    StartCoroutine(waitFor(.3f, drestoryDeadOppPet));
+                    StartCoroutine(waitFor(.5f, moveOppTeam));
 
+                }
+            }
 
         }
         
@@ -138,18 +144,38 @@ public class BattleHandler : MonoBehaviour
     //This is called when someone on the player team dies and realigns the rest of the team 
     public void movePlayerTeam()
     {
-        foreach (GameObject n in rosterOBJ)
+        bool startMoving = false;
+        for (int i = 0; i < rosterOBJ.Count; i++)
         {
-            StartCoroutine(MoveOverSeconds(n, n.transform.position + new Vector3(1.7f, 0, 0), MOVE_SPEED));
+            if (Battle.instance.checkDead(roster[i]))
+            {
+                startMoving = true;
+            }
+            if (startMoving)
+            {
+                GameObject n = rosterOBJ[i];
+                StartCoroutine(MoveOverSeconds(n, n.transform.position + new Vector3(1.7f, 0, 0), MOVE_SPEED));
+            }
+            
         }
     }
 
     //This is called when someone on the oppenent team dies and realigns the rest of the team 
     public void moveOppTeam()
     {
-        foreach (GameObject n in opponentOBJ)
+        bool startMoving = false;
+        for (int i = 0; i < opponentOBJ.Count; i++)
         {
-            StartCoroutine(MoveOverSeconds(n, n.transform.position + new Vector3(-1.7f, 0, 0), MOVE_SPEED));
+            if (Battle.instance.checkDead(rosterOpp[i]))
+            {
+                startMoving = true;
+            }
+            if (startMoving)
+            {
+                GameObject n = opponentOBJ[i];
+                StartCoroutine(MoveOverSeconds(n, n.transform.position + new Vector3(-1.7f, 0, 0), MOVE_SPEED));
+            }
+
         }
     }
 

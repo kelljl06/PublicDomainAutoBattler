@@ -25,4 +25,10 @@ public class Winnie : Pets
 
     }
 
+    public override void onHit(Pets otherPet, List<Pets> alliedPets, List<Pets> opponentPets)
+    {
+        otherPet.setSPD(otherPet.getSPD() - 1);
+        this.setSPD(this.getSPD() + 1);
+    }
+
 }

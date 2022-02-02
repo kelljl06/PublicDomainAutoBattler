@@ -25,4 +25,18 @@ public class MobyDick : Pets
 
     }
 
+    public override void onPreHit(Pets otherPet, List<Pets> alliedPets, List<Pets> opponentPets)
+    {
+        int rand = Random.Range(0, opponentPets.Count);
+        opponentPets[rand].setHP(0);
+        this.setHP(0);
+        this.setATK(0);
+        foreach (Pets pet in opponentPets)
+        {
+            pet.setSPD(pet.getSPD() - 1);
+        }
+    }
+
+
+
 }
