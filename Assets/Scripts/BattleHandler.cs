@@ -169,13 +169,14 @@ public class BattleHandler : MonoBehaviour
     {
         float elapsedTime = 0;
         Vector3 startingPos = objectToMove.transform.position;
-        while (elapsedTime < seconds)
+        while (elapsedTime < seconds & objectToMove != null)
         {
             objectToMove.transform.position = Vector3.Lerp(startingPos, end, (elapsedTime / seconds));
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        objectToMove.transform.position = end;
+        if (objectToMove != null)
+            objectToMove.transform.position = end;
     }
 
 
@@ -184,16 +185,17 @@ public class BattleHandler : MonoBehaviour
     {
         float elapsedTime = 0;
         Vector3 startingPos = objectToMove.transform.position;
-        while (elapsedTime < seconds)
+        while (elapsedTime < seconds & objectToMove != null)
         {
             objectToMove.transform.position = Vector3.Lerp(startingPos, end, (elapsedTime / seconds));
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        objectToMove.transform.position = end;
+        if (objectToMove != null)
+            objectToMove.transform.position = end;
 
         elapsedTime = 0;
-        while (elapsedTime < seconds)
+        while (elapsedTime < seconds & objectToMove != null)
         {
             objectToMove.transform.position = Vector3.Lerp(end, startingPos, (elapsedTime / seconds));
             elapsedTime += Time.deltaTime;
@@ -207,13 +209,14 @@ public class BattleHandler : MonoBehaviour
     {
         float elapsedTime = 0;
         Vector3 startingPos = objectToMove.transform.position;
-        while (elapsedTime < seconds)
+        while (elapsedTime < seconds & objectToMove != null)
         {
             objectToMove.transform.position = Vector3.Lerp(startingPos, end, (elapsedTime / seconds));
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        objectToMove.transform.position = end;
+        if (objectToMove != null)
+            objectToMove.transform.position = end;
     }
 
 
