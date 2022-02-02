@@ -22,6 +22,7 @@ public class ShopPetClicked : MonoBehaviour
     public void setplayerSpot(int spot) {
         playerSpot = spot;
         isSelected = true;
+        Debug.Log("" + spot);
     }
 
     public void Clear()
@@ -32,28 +33,34 @@ public class ShopPetClicked : MonoBehaviour
 
     public void SwapRoster(int place) {
 
-        if (isRosterSelected == false)
-        {
-            rosterSwap1 = place;
-            isRosterSelected = true;
+        if (place <= Player.instance.getHand().Count-1)
+
+        { 
+
+            if (isRosterSelected == false)
+            {
+                rosterSwap1 = place;
+                isRosterSelected = true;
+            }
+            else {
+                rosterSwap2 = place;
+
+               List<Pets> tempArray = Player.instance.getHand();
+
+                Pets temp = tempArray[rosterSwap1];
+                tempArray[rosterSwap1] = tempArray[rosterSwap2];
+                tempArray[rosterSwap2] = temp;
+
+                Player.instance.setHand(tempArray);
+
+                ShopHandler.instance.LoadPlayerPets();
+                Clear();
+            }
+
+
         }
-        else {
-            rosterSwap2= place;
-
-           List<Pets> tempArray = Player.instance.getHand();
-
-            Pets temp = tempArray[rosterSwap1];
-            tempArray[rosterSwap1] = tempArray[rosterSwap2];
-            tempArray[rosterSwap2] = temp;
-
-            Player.instance.setHand(tempArray);
-
-            ShopHandler.instance.LoadPlayerPets();
-            Clear();
 
 
-        }
-    
     }
 
 }
