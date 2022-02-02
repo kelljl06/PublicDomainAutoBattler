@@ -7,13 +7,11 @@ public class ShopHandler : MonoBehaviour
 
     public static ShopHandler instance;
 
-    List<Pets> possiblePets = new List<Pets>();
-
-    List<Pets> shopPetsClass = new List<Pets>();
-    List<GameObject> shopPets = new List<GameObject>();
+    public List<Pets> shopPetsClass = new List<Pets>();
+    public List<GameObject> shopPets = new List<GameObject>();
 
 
-    List<GameObject> PlayerPets = new List<GameObject>();
+    public List<GameObject> PlayerPets = new List<GameObject>();
 
 
 
@@ -50,7 +48,6 @@ public class ShopHandler : MonoBehaviour
     }
     void Start()
     {
-
         LoadPlayerPets();
         ShopRefresh();
     }
@@ -113,6 +110,7 @@ public class ShopHandler : MonoBehaviour
 
     public void ClearShop()
     {
+        ShopPetClicked.instance.ShopRefreshed();
         orderShop = 0;
         while (shopPets.Count > 0)
         {
@@ -170,7 +168,6 @@ public class ShopHandler : MonoBehaviour
 
     public void PurchasePet(int petPicked,int place)
     {
-        Debug.Log(""+ Player.instance.getHand().Count);
 
         if (place > Player.instance.getHand().Count)
             Player.instance.setWithinIndex(shopPetsClass[petPicked], Player.instance.getHand().Count);

@@ -14,21 +14,47 @@ public class ShopPetClicked : MonoBehaviour
     public int rosterSwap1;
     public int rosterSwap2;
 
+    public List<int> bannedPlaces; 
+
     public void Awake()
     {
         instance = this;
     }
 
     public void setplayerSpot(int spot) {
+        Debug.Log("Player Spot" + spot);
+        if (bannedPlaces.Contains(spot))
+            return;
         playerSpot = spot;
         isSelected = true;
-        Debug.Log("" + spot);
+        
     }
 
     public void Clear()
     {
         isSelected = false;
         isRosterSelected = false;
+    }
+
+    public void RemovePet() {
+        GameObject.Destroy(ShopHandler.instance.shopPets[playerSpot]);
+        ShopHandler.instance.shopPets.RemoveAt(playerSpot);
+        ShopHandler.instance.shopPets.Insert(playerSpot, null);
+        bannedPlaces.Add(playerSpot);
+    
+    }
+
+    public void ShopRefreshed() {
+        //Debug.Log("Banned " + bannedPlaces[1]);
+        bannedPlaces.Clear();
+        
+    }
+
+    public void BuySelectedPet(int purchaseLocation) {
+
+        ShopHandler.instance.PurchasePet(playerSpot, purchaseLocation);
+        Clear();
+        RemovePet();
     }
 
     public void SwapRoster(int place) {
