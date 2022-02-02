@@ -30,6 +30,36 @@ public class Pets
         SPD = pSPD;
     }
 
+    public object clone()
+    {
+        return this.MemberwiseClone();
+    }
+
+    virtual public void onHit(Pets otherPet, List<Pets> alliedPets, List<Pets> opponentPets)
+    {
+        return;
+    }
+
+    virtual public void onGetHit(Pets otherPet, List<Pets> alliedPets, List<Pets> opponentPets)
+    {
+        return;
+    }
+
+    virtual public void onDeath(List<Pets> alliedPets, List<Pets> opponentPets)
+    {
+        return;
+    }
+
+    virtual public void onSpawn(List<Pets> alliedPets, List<Pets> opponentPets)
+    {
+        return;
+    }
+
+    virtual public void onPreHit(Pets otherPet, List<Pets> alliedPets, List<Pets> opponentPets)
+    {
+        return;
+    }
+
     override public string ToString()
     {
         return "("+ID.ToString()+","+ATK.ToString()+","+SPD.ToString()+","+HP.ToString()+")";
@@ -67,7 +97,10 @@ public class Pets
     }
     public void setSPD(int pSPD)
     {
-        SPD = pSPD;
+        if (pSPD >= 0)
+        {
+            SPD = pSPD;
+        }
     }
 
 

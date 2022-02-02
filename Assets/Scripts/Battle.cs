@@ -54,20 +54,30 @@ public class Battle : MonoBehaviour
 
             if (isPlayersTurn)
             {
+                pet1.onPreHit(pet2, player, opponent);
                 hit(pet1, pet2, true);
-                //Check so dead pet does not attack
+                pet1.onHit(pet2, player, opponent);
+                pet2.onGetHit(pet1, opponent, player);
                 isPlayersTurn = false;
             }
             else
             {
+                pet2.onPreHit(pet1, opponent, player);
                 hit(pet2, pet1, false);
-                //Check so dead pet does not attack
+                pet2.onHit(pet1, opponent, player);
+                pet1.onGetHit(pet2, player, opponent);
                 isPlayersTurn = true;
 
             }
         }
         else {
+            pet1.onPreHit(pet2, player, opponent);
+            pet2.onPreHit(pet1, opponent, player);
             mutualHit(pet1, pet2);
+            pet1.onHit(pet2, player, opponent);
+            pet2.onHit(pet1, opponent, player);
+            pet1.onGetHit(pet2, player, opponent);
+            pet2.onGetHit(pet1, opponent, player);
             inTurn = false;
         }
         if (checkDead(pet1, pet2))
@@ -78,16 +88,10 @@ public class Battle : MonoBehaviour
             }
 
             else if (checkDead(pet1)) {
-                int newPetSpeed = pet2.getSPD() - TIRED;
-                if (newPetSpeed < 0)
-                    newPetSpeed = 0;
-                pet2.setSPD(newPetSpeed);
+                pet2.setSPD(pet2.getSPD() - TIRED);
             } 
             else if (checkDead(pet2)) {
-                int newPetSpeed = pet1.getSPD() - TIRED;
-                if (newPetSpeed < 0)
-                    newPetSpeed = 0;
-                pet1.setSPD(newPetSpeed);
+                pet1.setSPD(pet1.getSPD() - TIRED);
             }
         }
             
@@ -133,8 +137,7 @@ public class Battle : MonoBehaviour
         {
             pet1.setATK(0);
             pet1.setHP(0);
-            pet1.setSPD(0);
-            Debug.Log("This pet is dead");
+            pet1.setSPD(0);            
             return true;
         }
         else
