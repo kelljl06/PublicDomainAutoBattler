@@ -50,13 +50,6 @@ public class ShopHandler : MonoBehaviour
     }
     void Start()
     {
-        possiblePets.Add(new Winnie());
-        possiblePets.Add(new MobyDick());
-        possiblePets.Add(new NutCracker());
-        possiblePets.Add(new Jesus());
-        possiblePets.Add(new Tarzan());
-        possiblePets.Add(new Death());
-        possiblePets.Add(new Bozo());
 
         LoadPlayerPets();
         ShopRefresh();
@@ -65,7 +58,7 @@ public class ShopHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+    
     }
 
     public void updateStats(GameObject charac, int ATK, int SPD, int HP)
@@ -78,7 +71,16 @@ public class ShopHandler : MonoBehaviour
 
     public void ShopRefresh() {
         ClearShop();
-        
+
+        possiblePets.Add(new Winnie());
+        possiblePets.Add(new MobyDick());
+        possiblePets.Add(new NutCracker());
+        possiblePets.Add(new Jesus());
+        possiblePets.Add(new Tarzan());
+        possiblePets.Add(new Death());
+        possiblePets.Add(new Bozo());
+
+
         for (int i = 0; 5 > i; i++) {
             rand = Random.Range(0, possiblePets.Count);
             shopPets.Add(createPet(possiblePets[rand].getPrefab(), false));
@@ -88,6 +90,8 @@ public class ShopHandler : MonoBehaviour
         
 
     }
+
+
     public void ClearShop()
     {
         orderShop = 0;

@@ -20,12 +20,10 @@ public class BattleHandler : MonoBehaviour
     {
 
         //Add Your Roster
-        roster.Add(Player.instance.getWithinIndex(0));
-        roster.Add(Player.instance.getWithinIndex(1));
-        roster.Add(Player.instance.getWithinIndex(2));
-        roster.Add(Player.instance.getWithinIndex(3));
-        roster.Add(Player.instance.getWithinIndex(4));
-
+        for (int i = 0; i < Player.instance.getHand().Count; i++)
+        {
+            roster.Add(Player.instance.getWithinIndex(i));
+        }
 
         //Add Opponent Roster
         rosterOpp.Add(new Jesus());
@@ -39,11 +37,11 @@ public class BattleHandler : MonoBehaviour
     public void Start()
     {
         //Create GameObjects for you
-        rosterOBJ.Add(Player_Spawner.instance.createPet(roster[0].getPrefab()));
-        rosterOBJ.Add(Player_Spawner.instance.createPet(roster[1].getPrefab()));
-        rosterOBJ.Add(Player_Spawner.instance.createPet(roster[2].getPrefab()));
-        rosterOBJ.Add(Player_Spawner.instance.createPet(roster[3].getPrefab()));
-        rosterOBJ.Add(Player_Spawner.instance.createPet(roster[4].getPrefab()));
+
+        for (int i = 0; i < Player.instance.getHand().Count; i++)
+        {
+            rosterOBJ.Add(Player_Spawner.instance.createPet(roster[i].getPrefab()));
+        }
 
         //Create GameObjects for opponent
         opponentOBJ.Add(Player_Spawner.instance.createPet(rosterOpp[0].getPrefab()));

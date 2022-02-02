@@ -19,14 +19,19 @@ public class Player_Spawner : MonoBehaviour
                             new Vector3 { x = -4.4f, y = -2, z = 0},
                             new Vector3 { x = -6.1f, y = -2, z = 0},
                             new Vector3 { x = -7.8f, y = -2, z = 0},
-                            new Vector3 { x = 1f, y = -2, z = 0 },
+     };
+
+    Vector3[] enemyPostitions = { new Vector3{ x = 1f, y = -2, z = 0 },
                             new Vector3 { x = 2.7f, y = -2, z = 0},
                             new Vector3 { x = 4.4f, y = -2, z = 0},
                             new Vector3 { x = 6.1f, y = -2, z = 0},
                             new Vector3 { x = 7.8f, y = -2, z = 0}
-     };
+
+    };
 
     public int order = 0;
+    public int playerOrder = 0;
+    public int enemyOrder = 0;
 
 
     //This creates the hit picture
@@ -47,12 +52,16 @@ public class Player_Spawner : MonoBehaviour
     public GameObject Spawn(GameObject ppet) {
 
         GameObject tempPet;
-        
-        tempPet = Instantiate(ppet, playerPositions[order], transform.localRotation);
 
-        if (order > 4)
+        if (Player.instance.getHand().Count > order)
         {
+            tempPet = Instantiate(ppet, playerPositions[playerOrder], transform.localRotation);
+            playerOrder++;
+        }
+        else {
+            tempPet = Instantiate(ppet, enemyPostitions[enemyOrder], transform.localRotation);
             tempPet.GetComponent<SpriteRenderer>().flipX = true;
+            enemyOrder++;
         }
 
         order++;
