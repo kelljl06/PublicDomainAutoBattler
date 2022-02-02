@@ -7,13 +7,11 @@ public class ShopHandler : MonoBehaviour
 
     public static ShopHandler instance;
 
-    List<Pets> possiblePets = new List<Pets>();
-
-    List<Pets> shopPetsClass = new List<Pets>();
-    List<GameObject> shopPets = new List<GameObject>();
+    public List<Pets> shopPetsClass = new List<Pets>();
+    public List<GameObject> shopPets = new List<GameObject>();
 
 
-    List<GameObject> PlayerPets = new List<GameObject>();
+    public List<GameObject> PlayerPets = new List<GameObject>();
 
 
 
@@ -50,7 +48,6 @@ public class ShopHandler : MonoBehaviour
     }
     void Start()
     {
-
         LoadPlayerPets();
         ShopRefresh();
     }
@@ -72,19 +69,38 @@ public class ShopHandler : MonoBehaviour
     public void ShopRefresh() {
         ClearShop();
 
-        possiblePets.Add(new Winnie());
-        possiblePets.Add(new MobyDick());
-        possiblePets.Add(new NutCracker());
-        possiblePets.Add(new Jesus());
-        possiblePets.Add(new Tarzan());
-        possiblePets.Add(new Death());
-        possiblePets.Add(new Bozo());
-
-
         for (int i = 0; 5 > i; i++) {
-            rand = Random.Range(0, possiblePets.Count);
-            shopPets.Add(createPet(possiblePets[rand].getPrefab(), false));
-            shopPetsClass.Add(possiblePets[rand]);
+            rand = Random.Range(0, 6);
+            switch (rand) {
+                case 0: 
+                    shopPetsClass.Add(new Winnie());
+                    shopPets.Add(createPet(new Winnie().getPrefab(), false));
+                    break;
+                case 1:
+                    shopPetsClass.Add(new MobyDick());
+                    shopPets.Add(createPet(new MobyDick().getPrefab(), false));
+                    break;
+                case 2:
+                    shopPetsClass.Add(new NutCracker());
+                    shopPets.Add(createPet(new NutCracker().getPrefab(), false));
+                    break;
+                case 3:
+                    shopPetsClass.Add(new Jesus());
+                    shopPets.Add(createPet(new Jesus().getPrefab(), false));
+                    break;
+                case 4:
+                    shopPetsClass.Add(new Tarzan());
+                    shopPets.Add(createPet(new Tarzan().getPrefab(), false));
+                    break;
+                case 5:
+                    shopPetsClass.Add(new Death());
+                    shopPets.Add(createPet(new Death().getPrefab(), false));
+                    break;
+                case 6:
+                    shopPetsClass.Add(new Bozo());
+                    shopPets.Add(createPet(new Bozo().getPrefab(), false));
+                    break;
+            }
             updateStats(shopPets[i], shopPetsClass[i].getATK(), shopPetsClass[i].getSPD(), shopPetsClass[i].getHP());
         }
         
@@ -94,6 +110,7 @@ public class ShopHandler : MonoBehaviour
 
     public void ClearShop()
     {
+        ShopPetClicked.instance.ShopRefreshed();
         orderShop = 0;
         while (shopPets.Count > 0)
         {
@@ -151,7 +168,6 @@ public class ShopHandler : MonoBehaviour
 
     public void PurchasePet(int petPicked,int place)
     {
-        Debug.Log(""+ Player.instance.getHand().Count);
 
         if (place > Player.instance.getHand().Count)
             Player.instance.setWithinIndex(shopPetsClass[petPicked], Player.instance.getHand().Count);

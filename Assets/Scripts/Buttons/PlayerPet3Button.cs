@@ -19,8 +19,7 @@ public class PlayerPet3Button : MonoBehaviour
     public void PlayClicked()
     {
         if (ShopPetClicked.instance.isSelected) {
-            ShopHandler.instance.PurchasePet(ShopPetClicked.instance.playerSpot, 2);
-            ShopPetClicked.instance.Clear();
+            ShopPetClicked.instance.BuySelectedPet(2);
         }
         else
         {
