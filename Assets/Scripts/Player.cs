@@ -35,7 +35,6 @@ public class Player : MonoBehaviour
             PlayerHand.RemoveAt(index);
         PlayerHand.Insert(index, pet);
 
-        Debug.Log("HandCount "+ PlayerHand.Count );
     }
 
 

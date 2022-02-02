@@ -30,6 +30,11 @@ public class Pets
         SPD = pSPD;
     }
 
+    public object clone()
+    {
+        return this.MemberwiseClone();
+    }
+
     virtual public void onHit(Pets otherPet, List<Pets> alliedPets, List<Pets> opponentPets)
     {
         return;
@@ -54,9 +59,6 @@ public class Pets
     {
         return;
     }
-
-
-
 
     override public string ToString()
     {
