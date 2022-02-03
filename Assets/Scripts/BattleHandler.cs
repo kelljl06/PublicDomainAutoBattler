@@ -41,15 +41,29 @@ public class BattleHandler : MonoBehaviour
         for (int i = 0; i < Player.instance.getHand().Count; i++)
         {
             rosterOBJ.Add(Player_Spawner.instance.createPet(roster[i].getPrefab()));
+            roster[i].visualEffect = rosterOBJ[i];
         }
 
         //Create GameObjects for opponent
-        opponentOBJ.Add(Player_Spawner.instance.createPet(rosterOpp[0].getPrefab()));
-        opponentOBJ.Add(Player_Spawner.instance.createPet(rosterOpp[1].getPrefab()));
-        opponentOBJ.Add(Player_Spawner.instance.createPet(rosterOpp[2].getPrefab()));
-        opponentOBJ.Add(Player_Spawner.instance.createPet(rosterOpp[3].getPrefab()));
-        opponentOBJ.Add(Player_Spawner.instance.createPet(rosterOpp[4].getPrefab()));
-
+        for (int i = 0; i < rosterOpp.Count; i++)
+        {
+            opponentOBJ.Add(Player_Spawner.instance.createPet(rosterOpp[i].getPrefab()));
+            rosterOpp[i].visualEffect = opponentOBJ[i];
+        }
+        Pets[] tempRoster = new Pets[5];
+        Pets[] tempOppRoster = new Pets[5];
+        roster.CopyTo(tempRoster);
+        rosterOpp.CopyTo(tempOppRoster);
+        foreach (Pets pet in tempRoster)
+        {
+            pet.onSpawn(roster, rosterOpp);
+        }
+        foreach (Pets pet in tempOppRoster)
+        {
+            pet.onSpawn(rosterOpp, roster);
+        }
+        StartCoroutine(waitFor(.5f, movePlayerTeam));
+        StartCoroutine(waitFor(.5f, moveOppTeam));
     }
     void Update()
     {
@@ -59,7 +73,7 @@ public class BattleHandler : MonoBehaviour
         {
 
             //Don't play if one of teams is empty
-            if (rosterOBJ.Count == 0 | opponentOBJ.Count == 0)
+            if (roster.Count == 0 | rosterOpp.Count == 0)
             {
                 Debug.Log("Game is Finished");
                 SceneManager.LoadScene("ShopUI", LoadSceneMode.Single);
@@ -78,6 +92,11 @@ public class BattleHandler : MonoBehaviour
                 if (Battle.instance.checkDead(roster[i]))
                 {
                     roster[i].onDeath(roster, rosterOpp);
+                    for (int j = 0; j < roster.Count; j++)
+                    {
+                        if (j != i)
+                            roster[j].onAllyDeath(roster[i], roster, rosterOpp);
+                    }
                     drestoryDeadPlayerPet(i);
                     
                 }
@@ -87,7 +106,12 @@ public class BattleHandler : MonoBehaviour
             {
                 if (Battle.instance.checkDead(rosterOpp[i]))
                 {
-                    rosterOpp[i].onDeath(roster, rosterOpp);
+                    rosterOpp[i].onDeath(rosterOpp, roster);
+                    for (int j = 0; j < rosterOpp.Count; j++)
+                    {
+                        if (j != i)
+                            rosterOpp[j].onAllyDeath(rosterOpp[i], rosterOpp, roster);
+                    }
                     drestoryDeadOppPet(i);
                     
                 }
@@ -98,13 +122,13 @@ public class BattleHandler : MonoBehaviour
         }
         
         //Update visual statistics for pets
-        for (int i = 0; i < rosterOBJ.Count; i++)
+        for (int i = 0; i < roster.Count; i++)
         {
-            Player_Spawner.instance.updateHP(rosterOBJ[i], roster[i].getATK(), roster[i].getSPD(), roster[i].getHP());
+            Player_Spawner.instance.updateHP(roster[i].visualEffect, roster[i].getATK(), roster[i].getSPD(), roster[i].getHP());
         }
-        for (int i = 0; i < opponentOBJ.Count; i++)
+        for (int i = 0; i < rosterOpp.Count; i++)
         {
-            Player_Spawner.instance.updateHP(opponentOBJ[i], rosterOpp[i].getATK(), rosterOpp[i].getSPD(), rosterOpp[i].getHP());
+            Player_Spawner.instance.updateHP(rosterOpp[i].visualEffect, rosterOpp[i].getATK(), rosterOpp[i].getSPD(), rosterOpp[i].getHP());
         }
 
 
@@ -113,16 +137,14 @@ public class BattleHandler : MonoBehaviour
     //Destorys the for pet in the player roster
     public void drestoryDeadPlayerPet(int i)
     {
-        GameObject.Destroy(rosterOBJ[i]);
-        rosterOBJ.RemoveAt(i);
+        GameObject.Destroy(roster[i].visualEffect);
         roster.RemoveAt(i); 
     }
 
     //Destorys the for pet in the Oppenent roster
     public void drestoryDeadOppPet(int i)
     {
-        GameObject.Destroy(opponentOBJ[i]);
-        opponentOBJ.RemoveAt(i);
+        GameObject.Destroy(rosterOpp[i].visualEffect);
         rosterOpp.RemoveAt(i);
     }
 
@@ -130,23 +152,23 @@ public class BattleHandler : MonoBehaviour
     public void playerHitAna()
     {
 
-        GameObject toHit = rosterOBJ[0];
+        GameObject toHit = roster[0].visualEffect;
         StartCoroutine(HitOverSeconds(toHit, toHit.transform.position + new Vector3(1f, 0, 0), ATTACK_SPEED));
     }
 
     //Does the same as the code above but for the oppenent
     public void oppHitAna()
     {
-        GameObject toHit2 = opponentOBJ[0];
+        GameObject toHit2 = rosterOpp[0].visualEffect;
         StartCoroutine(HitOverSeconds(toHit2, toHit2.transform.position + new Vector3(-1f, 0, 0), ATTACK_SPEED));
     }
 
     //This is called when someone on the player team dies and realigns the rest of the team 
     public void movePlayerTeam()
     {
-        for (int i = 0; i < rosterOBJ.Count; i++)
+        for (int i = 0; i < roster.Count; i++)
         {
-            GameObject n = rosterOBJ[i];
+            GameObject n = roster[i].visualEffect;
             Vector3 vecGoal = new Vector3((float)(-1-1.7*i), -2, 0);
             StartCoroutine(MoveOverSeconds(n, vecGoal, MOVE_SPEED));
         }
@@ -155,9 +177,9 @@ public class BattleHandler : MonoBehaviour
     //This is called when someone on the oppenent team dies and realigns the rest of the team 
     public void moveOppTeam()
     {       
-        for (int i = 0; i < opponentOBJ.Count; i++)
+        for (int i = 0; i < rosterOpp.Count; i++)
         {
-            GameObject n = opponentOBJ[i];
+            GameObject n = rosterOpp[i].visualEffect;
             Vector3 vecGoal = new Vector3((float)(1 + 1.7 * i), -2, 0);
             StartCoroutine(MoveOverSeconds(n, vecGoal, MOVE_SPEED));
         }
