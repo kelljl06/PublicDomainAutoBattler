@@ -31,4 +31,10 @@ public class Jesus : Pets
         alliedPets.Add(this);
     }
 
+    public override void onAllyDeath(Pets pet, List<Pets> alliedPets, List<Pets> opponentPets)
+    {
+        this.setATK(this.getATK() + 2);
+        this.setHP(this.getHP() + 2);
+    }
+
 }

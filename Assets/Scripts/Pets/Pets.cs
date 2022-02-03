@@ -61,7 +61,7 @@ public class Pets
         return;
     }
 
-    virtual public void onAllyDeath(List<Pets> alliedPets, List<Pets> opponentPets)
+    virtual public void onAllyDeath(Pets pet, List<Pets> alliedPets, List<Pets> opponentPets)
     {
         return;
     }
@@ -93,7 +93,7 @@ public class Pets
     {
         ID = pID;
     }
-    public void setHP(int pHP)
+    virtual public void setHP(int pHP)
     {
         HP = pHP;
     }
