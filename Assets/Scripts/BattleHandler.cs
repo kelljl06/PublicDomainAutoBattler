@@ -50,8 +50,8 @@ public class BattleHandler : MonoBehaviour
             opponentOBJ.Add(Player_Spawner.instance.createPet(rosterOpp[i].getPrefab()));
             rosterOpp[i].visualEffect = opponentOBJ[i];
         }
-        Pets[] tempRoster = new Pets[5];
-        Pets[] tempOppRoster = new Pets[5];
+        Pets[] tempRoster = new Pets[roster.Count];
+        Pets[] tempOppRoster = new Pets[rosterOpp.Count];
         roster.CopyTo(tempRoster);
         rosterOpp.CopyTo(tempOppRoster);
         foreach (Pets pet in tempRoster)
