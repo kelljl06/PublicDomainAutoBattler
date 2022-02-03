@@ -15,6 +15,7 @@ public class Pets
     public int Base_SPD = 1;
 
     public string prefab;
+    public GameObject visualEffect;
 
     public Pets()
     {
@@ -60,6 +61,11 @@ public class Pets
         return;
     }
 
+    virtual public void onAllyDeath(Pets pet, List<Pets> alliedPets, List<Pets> opponentPets)
+    {
+        return;
+    }
+
     override public string ToString()
     {
         return "("+ID.ToString()+","+ATK.ToString()+","+SPD.ToString()+","+HP.ToString()+")";
@@ -87,7 +93,7 @@ public class Pets
     {
         ID = pID;
     }
-    public void setHP(int pHP)
+    virtual public void setHP(int pHP)
     {
         HP = pHP;
     }
