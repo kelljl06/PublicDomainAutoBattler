@@ -151,7 +151,7 @@ public class BattleHandler : MonoBehaviour
     //Called to move the first user pet back and forth to kinda look like its hitting
     public void playerHitAna()
     {
-
+        Player_Spawner.instance.createClash();
         GameObject toHit = roster[0].visualEffect;
         StartCoroutine(HitOverSeconds(toHit, toHit.transform.position + new Vector3(1f, 0, 0), ATTACK_SPEED));
     }
@@ -159,6 +159,7 @@ public class BattleHandler : MonoBehaviour
     //Does the same as the code above but for the oppenent
     public void oppHitAna()
     {
+        Player_Spawner.instance.createClash();
         GameObject toHit2 = rosterOpp[0].visualEffect;
         StartCoroutine(HitOverSeconds(toHit2, toHit2.transform.position + new Vector3(-1f, 0, 0), ATTACK_SPEED));
     }
@@ -213,6 +214,7 @@ public class BattleHandler : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+
         if (objectToMove != null)
             objectToMove.transform.position = end;
 

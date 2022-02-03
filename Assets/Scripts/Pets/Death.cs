@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
+using UnityEngine.UI;
+using System;
 
 public class Death : Pets
 {
@@ -49,8 +50,23 @@ public class Death : Pets
         {
             this.setHP(0);
         }
+        spawnTally(attackCount);
     }
 
-
+    public void spawnTally(int n)
+    {
+        GameObject tally = Resources.Load("UI/Empty") as GameObject;
+        switch (n)
+        {
+            case 1:
+                tally = Resources.Load("UI/Tally") as GameObject;
+                break;
+            case 2:
+                tally = Resources.Load("UI/Tally 2") as GameObject;
+                break;
+        }
+        
+        Battle.instance.spawnObjectAbove(tally, this.visualEffect);
+    }
 
 }
