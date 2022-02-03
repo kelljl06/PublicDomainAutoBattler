@@ -10,6 +10,10 @@ public class ShopPetClicked : MonoBehaviour
     public bool isSelected = false;
     public int playerSpot;
 
+    public int money;
+    public int unitPrice;
+    public int rerollPrice;
+
     public bool isRosterSelected = false;
     public int rosterSwap1;
     public int rosterSwap2;
@@ -19,6 +23,9 @@ public class ShopPetClicked : MonoBehaviour
     public void Awake()
     {
         instance = this;
+        money = 10;
+        unitPrice = 3;
+        rerollPrice = 1;
     }
 
     public void setplayerSpot(int spot) {
@@ -45,16 +52,30 @@ public class ShopPetClicked : MonoBehaviour
     }
 
     public void ShopRefreshed() {
-        //Debug.Log("Banned " + bannedPlaces[1]);
         bannedPlaces.Clear();
         
     }
 
     public void BuySelectedPet(int purchaseLocation) {
 
-        ShopHandler.instance.PurchasePet(playerSpot, purchaseLocation);
-        Clear();
-        RemovePet();
+        if (checkPurchaseable(unitPrice))
+        {
+            ShopHandler.instance.PurchasePet(playerSpot, purchaseLocation);
+            Clear();
+            RemovePet();
+            payMoney(unitPrice);
+        }
+    }
+
+    public void payMoney(int price) {
+        money = money - price;
+    }
+
+    public bool checkPurchaseable(int price) {
+        if (money - price >= 0) {
+            return true;
+        }
+        return false;
     }
 
     public void SwapRoster(int place) {

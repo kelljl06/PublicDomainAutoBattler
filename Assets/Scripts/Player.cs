@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
 
     public static List<Pets> PlayerHand = new  List<Pets>();
 
+    public int rounds;
+
     public static Player instance;
 
     public void Awake()

@@ -20,6 +20,8 @@ public class ShopHandler : MonoBehaviour
     public int orderPlayer;
     public int rand;
 
+    public bool firstReroll = true;
+
     Vector3[] shopPositions = {
         new Vector3 { x = 6.3f, y = -2, z = 0},
         new Vector3 { x = 3.1f, y = -2, z = 0},
@@ -67,7 +69,14 @@ public class ShopHandler : MonoBehaviour
     }
 
     public void ShopRefresh() {
+
+        if (!ShopPetClicked.instance.checkPurchaseable(ShopPetClicked.instance.rerollPrice))
+            return;
         ClearShop();
+        if (!firstReroll)
+            ShopPetClicked.instance.payMoney(ShopPetClicked.instance.rerollPrice);
+
+        firstReroll = false;
 
         for (int i = 0; 5 > i; i++) {
             rand = Random.Range(0, 6);
