@@ -41,15 +41,29 @@ public class BattleHandler : MonoBehaviour
         for (int i = 0; i < Player.instance.getHand().Count; i++)
         {
             rosterOBJ.Add(Player_Spawner.instance.createPet(roster[i].getPrefab()));
+            roster[i].visualEffect = rosterOBJ[i];
         }
 
         //Create GameObjects for opponent
-        opponentOBJ.Add(Player_Spawner.instance.createPet(rosterOpp[0].getPrefab()));
-        opponentOBJ.Add(Player_Spawner.instance.createPet(rosterOpp[1].getPrefab()));
-        opponentOBJ.Add(Player_Spawner.instance.createPet(rosterOpp[2].getPrefab()));
-        opponentOBJ.Add(Player_Spawner.instance.createPet(rosterOpp[3].getPrefab()));
-        opponentOBJ.Add(Player_Spawner.instance.createPet(rosterOpp[4].getPrefab()));
-
+        for (int i = 0; i < rosterOpp.Count; i++)
+        {
+            opponentOBJ.Add(Player_Spawner.instance.createPet(rosterOpp[i].getPrefab()));
+            rosterOpp[i].visualEffect = opponentOBJ[i];
+        }
+        Pets[] tempRoster = new Pets[5];
+        Pets[] tempOppRoster = new Pets[5];
+        roster.CopyTo(tempRoster);
+        rosterOpp.CopyTo(tempOppRoster);
+        foreach (Pets pet in tempRoster)
+        {
+            pet.onSpawn(roster, rosterOpp);
+        }
+        foreach (Pets pet in tempOppRoster)
+        {
+            pet.onSpawn(rosterOpp, roster);
+        }
+        StartCoroutine(waitFor(.5f, movePlayerTeam));
+        StartCoroutine(waitFor(.5f, moveOppTeam));
     }
     void Update()
     {
@@ -144,9 +158,9 @@ public class BattleHandler : MonoBehaviour
     //This is called when someone on the player team dies and realigns the rest of the team 
     public void movePlayerTeam()
     {
-        for (int i = 0; i < rosterOBJ.Count; i++)
+        for (int i = 0; i < roster.Count; i++)
         {
-            GameObject n = rosterOBJ[i];
+            GameObject n = roster[i].visualEffect;
             Vector3 vecGoal = new Vector3((float)(-1-1.7*i), -2, 0);
             StartCoroutine(MoveOverSeconds(n, vecGoal, MOVE_SPEED));
         }
@@ -155,9 +169,9 @@ public class BattleHandler : MonoBehaviour
     //This is called when someone on the oppenent team dies and realigns the rest of the team 
     public void moveOppTeam()
     {       
-        for (int i = 0; i < opponentOBJ.Count; i++)
+        for (int i = 0; i < rosterOpp.Count; i++)
         {
-            GameObject n = opponentOBJ[i];
+            GameObject n = rosterOpp[i].visualEffect;
             Vector3 vecGoal = new Vector3((float)(1 + 1.7 * i), -2, 0);
             StartCoroutine(MoveOverSeconds(n, vecGoal, MOVE_SPEED));
         }

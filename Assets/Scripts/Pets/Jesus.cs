@@ -25,5 +25,10 @@ public class Jesus : Pets
 
     }
 
+    public override void onSpawn(List<Pets> alliedPets, List<Pets> opponentPets)
+    {
+        alliedPets.Remove(this);
+        alliedPets.Add(this);
+    }
 
 }

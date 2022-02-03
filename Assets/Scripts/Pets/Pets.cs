@@ -15,6 +15,7 @@ public class Pets
     public int Base_SPD = 1;
 
     public string prefab;
+    public GameObject visualEffect;
 
     public Pets()
     {
@@ -56,6 +57,11 @@ public class Pets
     }
 
     virtual public void onPreHit(Pets otherPet, List<Pets> alliedPets, List<Pets> opponentPets)
+    {
+        return;
+    }
+
+    virtual public void onAllyDeath(List<Pets> alliedPets, List<Pets> opponentPets)
     {
         return;
     }
