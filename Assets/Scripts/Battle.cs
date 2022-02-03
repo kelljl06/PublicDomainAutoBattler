@@ -12,6 +12,7 @@ public class Battle : MonoBehaviour
     public bool inTurn = false;
 
     public const int TIRED = 2;
+    public const int DEFAULT_DURATION = 1;
 
 
     public void Awake() => instance = this;
@@ -27,9 +28,6 @@ public class Battle : MonoBehaviour
         //Save the two pets that will battle
         Pets pet1 = player[0];
         Pets pet2 = opponent[0];
-
-        Player_Spawner.instance.createClash();
-
 
         //Check which pet is faster and have it hit first
         if (pet1.getSPD() != pet2.getSPD())
@@ -144,5 +142,17 @@ public class Battle : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public void spawnObjectAbove(GameObject newThing, GameObject pet, int duration = DEFAULT_DURATION)
+    {
+        newThing = Instantiate(newThing, pet.transform.position + new Vector3(0, 2f, 0), transform.localRotation);
+        StartCoroutine(deleteObjectAbove(duration, newThing));
+    }
+    public IEnumerator deleteObjectAbove(float time, GameObject objectAbove)
+    {
+        yield return new WaitForSeconds(time);
+
+        GameObject.Destroy(objectAbove);
     }
 }

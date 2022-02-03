@@ -50,8 +50,8 @@ public class BattleHandler : MonoBehaviour
             opponentOBJ.Add(Player_Spawner.instance.createPet(rosterOpp[i].getPrefab()));
             rosterOpp[i].visualEffect = opponentOBJ[i];
         }
-        Pets[] tempRoster = new Pets[5];
-        Pets[] tempOppRoster = new Pets[5];
+        Pets[] tempRoster = new Pets[roster.Count];
+        Pets[] tempOppRoster = new Pets[rosterOpp.Count];
         roster.CopyTo(tempRoster);
         rosterOpp.CopyTo(tempOppRoster);
         foreach (Pets pet in tempRoster)
@@ -151,7 +151,7 @@ public class BattleHandler : MonoBehaviour
     //Called to move the first user pet back and forth to kinda look like its hitting
     public void playerHitAna()
     {
-
+        Player_Spawner.instance.createClash();
         GameObject toHit = roster[0].visualEffect;
         StartCoroutine(HitOverSeconds(toHit, toHit.transform.position + new Vector3(1f, 0, 0), ATTACK_SPEED));
     }
@@ -159,6 +159,7 @@ public class BattleHandler : MonoBehaviour
     //Does the same as the code above but for the oppenent
     public void oppHitAna()
     {
+        Player_Spawner.instance.createClash();
         GameObject toHit2 = rosterOpp[0].visualEffect;
         StartCoroutine(HitOverSeconds(toHit2, toHit2.transform.position + new Vector3(-1f, 0, 0), ATTACK_SPEED));
     }
@@ -213,6 +214,7 @@ public class BattleHandler : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+
         if (objectToMove != null)
             objectToMove.transform.position = end;
 
@@ -225,22 +227,6 @@ public class BattleHandler : MonoBehaviour
         }
 
     }
-
-    //Deadass dont remember but seems useful and it some lerp movement function
-    public IEnumerator HitImageSpawn(GameObject objectToMove, Vector3 end, float seconds)
-    {
-        float elapsedTime = 0;
-        Vector3 startingPos = objectToMove.transform.position;
-        while (elapsedTime < seconds & objectToMove != null)
-        {
-            objectToMove.transform.position = Vector3.Lerp(startingPos, end, (elapsedTime / seconds));
-            elapsedTime += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
-        }
-        if (objectToMove != null)
-            objectToMove.transform.position = end;
-    }
-
 
     //This function simply acts as a timer
     public IEnumerator waitFor(float time)
