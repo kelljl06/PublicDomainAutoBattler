@@ -133,6 +133,7 @@ public class Battle : MonoBehaviour
     {
         if (pet1.getHP() <= 0)
         {
+            spawnObjectAbove(Resources.Load("UI/Skull") as GameObject, pet1.visualEffect);
             pet1.setATK(0);
             pet1.setHP(0);
             pet1.setSPD(0);            

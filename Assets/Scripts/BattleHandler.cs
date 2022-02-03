@@ -15,7 +15,7 @@ public class BattleHandler : MonoBehaviour
     List<Pets> rosterOpp = new List<Pets>();
     List<GameObject> rosterOBJ = new List<GameObject>();
     List<GameObject> opponentOBJ = new List<GameObject>();
-        
+
     private void Awake()
     {
 
@@ -25,14 +25,35 @@ public class BattleHandler : MonoBehaviour
             roster.Add(Player.instance.getWithinIndex(i).clone() as Pets);
         }
 
-        //Add Opponent Roster
-        rosterOpp.Add(new NutCracker());
-        rosterOpp.Add(new MobyDick());
-        rosterOpp.Add(new NutCracker());
-        rosterOpp.Add(new Winnie());
-        rosterOpp.Add(new NutCracker());
+        for (int i = 0; 5 > i; i++)
+        {
+            int rand = UnityEngine.Random.Range(0, 6);
+            switch (rand)
+            {
+                case 0:
+                    rosterOpp.Add(new Winnie());
+                    break;
+                case 1:
+                    rosterOpp.Add(new MobyDick());
+                    break;
+                case 2:
+                    rosterOpp.Add(new NutCracker());
+                    break;
+                case 3:
+                    rosterOpp.Add(new Jesus());
+                    break;
+                case 4:
+                    rosterOpp.Add(new Death());
+                    break;
+                case 5:
+                    rosterOpp.Add(new Tarzan());
+                    break;
+                case 6:
+                    rosterOpp.Add(new Bozo());
+                    break;
+            }
+        }
     }
-    
 
     public void Start()
     {
