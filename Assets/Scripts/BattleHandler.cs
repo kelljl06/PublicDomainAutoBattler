@@ -22,11 +22,11 @@ public class BattleHandler : MonoBehaviour
         //Add Your Roster
         for (int i = 0; i < Player.instance.getHand().Count; i++)
         {
-            roster.Add(Player.instance.getWithinIndex(i));
+            roster.Add(Player.instance.getWithinIndex(i).clone() as Pets);
         }
 
         //Add Opponent Roster
-        rosterOpp.Add(new Jesus());
+        rosterOpp.Add(new NutCracker());
         rosterOpp.Add(new MobyDick());
         rosterOpp.Add(new NutCracker());
         rosterOpp.Add(new Winnie());
@@ -70,23 +70,30 @@ public class BattleHandler : MonoBehaviour
                 //Battle the two lineups   
                 Battle.instance.battle(roster, rosterOpp);
             }
-            
+
 
             //Check to see if your lineups has a dead Pet
-            if (Battle.instance.checkDead(roster[0]))
+            for (int i = 0; i < roster.Count; i++)
             {
-
-                StartCoroutine(waitFor(.3f, drestoryDeadPlayerPet));
-                StartCoroutine(waitFor(.5f, movePlayerTeam));
+                if (Battle.instance.checkDead(roster[i]))
+                {
+                    roster[i].onDeath(roster, rosterOpp);
+                    drestoryDeadPlayerPet(i);
+                    
+                }
             }
             //Check to see if opponent lineups has a dead Pet
-            if (Battle.instance.checkDead(rosterOpp[0]))
+            for (int i = 0; i < rosterOpp.Count; i++)
             {
-                StartCoroutine(waitFor(.3f, drestoryDeadOppPet));
-                StartCoroutine(waitFor(.5f, moveOppTeam));
-                
+                if (Battle.instance.checkDead(rosterOpp[i]))
+                {
+                    rosterOpp[i].onDeath(roster, rosterOpp);
+                    drestoryDeadOppPet(i);
+                    
+                }
             }
-
+            StartCoroutine(waitFor(.5f, movePlayerTeam));
+            StartCoroutine(waitFor(.5f, moveOppTeam));
 
         }
         
@@ -104,20 +111,19 @@ public class BattleHandler : MonoBehaviour
     }
 
     //Destorys the for pet in the player roster
-    public void drestoryDeadPlayerPet()
+    public void drestoryDeadPlayerPet(int i)
     {
-        GameObject.Destroy(rosterOBJ[0]);
-        rosterOBJ.RemoveAt(0);
-        roster.RemoveAt(0);
+        GameObject.Destroy(rosterOBJ[i]);
+        rosterOBJ.RemoveAt(i);
+        roster.RemoveAt(i); 
     }
 
     //Destorys the for pet in the Oppenent roster
-    public void drestoryDeadOppPet()
+    public void drestoryDeadOppPet(int i)
     {
-        
-        GameObject.Destroy(opponentOBJ[0]);
-        opponentOBJ.RemoveAt(0);
-        rosterOpp.RemoveAt(0);
+        GameObject.Destroy(opponentOBJ[i]);
+        opponentOBJ.RemoveAt(i);
+        rosterOpp.RemoveAt(i);
     }
 
     //Called to move the first user pet back and forth to kinda look like its hitting
@@ -138,18 +144,22 @@ public class BattleHandler : MonoBehaviour
     //This is called when someone on the player team dies and realigns the rest of the team 
     public void movePlayerTeam()
     {
-        foreach (GameObject n in rosterOBJ)
+        for (int i = 0; i < rosterOBJ.Count; i++)
         {
-            StartCoroutine(MoveOverSeconds(n, n.transform.position + new Vector3(1.7f, 0, 0), MOVE_SPEED));
+            GameObject n = rosterOBJ[i];
+            Vector3 vecGoal = new Vector3((float)(-1-1.7*i), -2, 0);
+            StartCoroutine(MoveOverSeconds(n, vecGoal, MOVE_SPEED));
         }
     }
 
     //This is called when someone on the oppenent team dies and realigns the rest of the team 
     public void moveOppTeam()
-    {
-        foreach (GameObject n in opponentOBJ)
+    {       
+        for (int i = 0; i < opponentOBJ.Count; i++)
         {
-            StartCoroutine(MoveOverSeconds(n, n.transform.position + new Vector3(-1.7f, 0, 0), MOVE_SPEED));
+            GameObject n = opponentOBJ[i];
+            Vector3 vecGoal = new Vector3((float)(1 + 1.7 * i), -2, 0);
+            StartCoroutine(MoveOverSeconds(n, vecGoal, MOVE_SPEED));
         }
     }
 
@@ -159,13 +169,14 @@ public class BattleHandler : MonoBehaviour
     {
         float elapsedTime = 0;
         Vector3 startingPos = objectToMove.transform.position;
-        while (elapsedTime < seconds)
+        while (elapsedTime < seconds & objectToMove != null)
         {
             objectToMove.transform.position = Vector3.Lerp(startingPos, end, (elapsedTime / seconds));
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        objectToMove.transform.position = end;
+        if (objectToMove != null)
+            objectToMove.transform.position = end;
     }
 
 
@@ -174,16 +185,17 @@ public class BattleHandler : MonoBehaviour
     {
         float elapsedTime = 0;
         Vector3 startingPos = objectToMove.transform.position;
-        while (elapsedTime < seconds)
+        while (elapsedTime < seconds & objectToMove != null)
         {
             objectToMove.transform.position = Vector3.Lerp(startingPos, end, (elapsedTime / seconds));
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        objectToMove.transform.position = end;
+        if (objectToMove != null)
+            objectToMove.transform.position = end;
 
         elapsedTime = 0;
-        while (elapsedTime < seconds)
+        while (elapsedTime < seconds & objectToMove != null)
         {
             objectToMove.transform.position = Vector3.Lerp(end, startingPos, (elapsedTime / seconds));
             elapsedTime += Time.deltaTime;
@@ -197,13 +209,14 @@ public class BattleHandler : MonoBehaviour
     {
         float elapsedTime = 0;
         Vector3 startingPos = objectToMove.transform.position;
-        while (elapsedTime < seconds)
+        while (elapsedTime < seconds & objectToMove != null)
         {
             objectToMove.transform.position = Vector3.Lerp(startingPos, end, (elapsedTime / seconds));
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        objectToMove.transform.position = end;
+        if (objectToMove != null)
+            objectToMove.transform.position = end;
     }
 
 
