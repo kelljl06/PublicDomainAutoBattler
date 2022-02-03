@@ -114,11 +114,11 @@ public class BattleHandler : MonoBehaviour
         //Update visual statistics for pets
         for (int i = 0; i < rosterOBJ.Count; i++)
         {
-            Player_Spawner.instance.updateHP(rosterOBJ[i], roster[i].getATK(), roster[i].getSPD(), roster[i].getHP());
+            Player_Spawner.instance.updateHP(roster[i].visualEffect, roster[i].getATK(), roster[i].getSPD(), roster[i].getHP());
         }
         for (int i = 0; i < opponentOBJ.Count; i++)
         {
-            Player_Spawner.instance.updateHP(opponentOBJ[i], rosterOpp[i].getATK(), rosterOpp[i].getSPD(), rosterOpp[i].getHP());
+            Player_Spawner.instance.updateHP(rosterOpp[i].visualEffect, rosterOpp[i].getATK(), rosterOpp[i].getSPD(), rosterOpp[i].getHP());
         }
 
 
