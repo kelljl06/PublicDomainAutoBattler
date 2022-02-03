@@ -1282,6 +1282,8 @@ MonoBehaviour:
   isSelected: 0
   playerSpot: 0
   money: 0
+  unitPrice: 0
+  rerollPrice: 0
   isRosterSelected: 0
   rosterSwap1: 0
   rosterSwap2: 0
@@ -1379,7 +1381,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinCount: {fileID: 590137713}
-  bankAccount: {fileID: 590137713}
 --- !u!1 &640044320
 GameObject:
   m_ObjectHideFlags: 0
@@ -3445,6 +3446,7 @@ MonoBehaviour:
   orderShop: 0
   orderPlayer: 0
   rand: 0
+  firstReroll: 1
 --- !u!4 &2035917868
 Transform:
   m_ObjectHideFlags: 0
