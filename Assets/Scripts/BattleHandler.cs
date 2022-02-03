@@ -226,22 +226,6 @@ public class BattleHandler : MonoBehaviour
 
     }
 
-    //Deadass dont remember but seems useful and it some lerp movement function
-    public IEnumerator HitImageSpawn(GameObject objectToMove, Vector3 end, float seconds)
-    {
-        float elapsedTime = 0;
-        Vector3 startingPos = objectToMove.transform.position;
-        while (elapsedTime < seconds & objectToMove != null)
-        {
-            objectToMove.transform.position = Vector3.Lerp(startingPos, end, (elapsedTime / seconds));
-            elapsedTime += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
-        }
-        if (objectToMove != null)
-            objectToMove.transform.position = end;
-    }
-
-
     //This function simply acts as a timer
     public IEnumerator waitFor(float time)
     {
