@@ -1527,7 +1527,7 @@ GameObject:
   - component: {fileID: 759290277}
   - component: {fileID: 759290276}
   m_Layer: 0
-  m_Name: frame_08_delay-0.1s
+  m_Name: Heart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
