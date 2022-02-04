@@ -66,7 +66,7 @@ public class Death : Pets
                 break;
         }
         
-        Battle.instance.spawnObjectAbove(tally, this.visualEffect);
+        BattleHandler.instance.spawnObjectAbove(tally, this.visualEffect);
     }
 
 }

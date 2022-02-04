@@ -35,6 +35,9 @@ public class MobyDick : Pets
         {
             pet.setSPD(pet.getSPD() - 1);
         }
+
+        //GameObject wave = Resources.Load("UI/Wave") as GameObject;
+        //BattleHandler.instance.moveObject(wave, true, this.visualEffect.transform.position);
     }
 
 

@@ -7,19 +7,22 @@ using UnityEngine.SceneManagement;
 
 public class BattleHandler : MonoBehaviour
 {
+    public static BattleHandler instance;
 
-    public float MOVE_SPEED = .3f;
-    public float ATTACK_SPEED = .1f;
+    public const float MOVE_SPEED = .3f;
+    public const float ATTACK_SPEED = .1f;
+    public const int DEFAULT_DURATION = 1;
 
     List<Pets> roster = new List<Pets>();
     List<Pets> rosterOpp = new List<Pets>();
     List<GameObject> rosterOBJ = new List<GameObject>();
     List<GameObject> opponentOBJ = new List<GameObject>();
 
-    private void Awake()
+    public void Awake() => instance = this;
+
+    public void Start()
     {
 
-        //Add Your Roster
         for (int i = 0; i < Player.instance.getHand().Count; i++)
         {
             roster.Add(Player.instance.getWithinIndex(i).clone() as Pets);
@@ -53,10 +56,6 @@ public class BattleHandler : MonoBehaviour
                     break;
             }
         }
-    }
-
-    public void Start()
-    {
         //Create GameObjects for you
 
         for (int i = 0; i < Player.instance.getHand().Count; i++)
@@ -262,4 +261,21 @@ public class BattleHandler : MonoBehaviour
         act();
     }
 
+    public void moveObject(GameObject newThing, bool movingLeft, Vector3 startPoint)
+    {
+        newThing = Instantiate(newThing, startPoint, transform.localRotation);
+        StartCoroutine(MoveOverSeconds(newThing, newThing.transform.position - new Vector3(0, -10+newThing.transform.position[1]), MOVE_SPEED));
+    }
+
+    public void spawnObjectAbove(GameObject newThing, GameObject pet, int duration = DEFAULT_DURATION)
+    {
+        newThing = Instantiate(newThing, pet.transform.position + new Vector3(0, 2f, 0), transform.localRotation);
+        StartCoroutine(deleteObjectAbove(duration, newThing));
+    }
+    public IEnumerator deleteObjectAbove(float time, GameObject objectAbove)
+    {
+        yield return new WaitForSeconds(time);
+
+        GameObject.Destroy(objectAbove);
+    }
 }
