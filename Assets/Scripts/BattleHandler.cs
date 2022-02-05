@@ -95,6 +95,11 @@ public class BattleHandler : MonoBehaviour
             //Don't play if one of teams is empty
             if (roster.Count == 0 | rosterOpp.Count == 0)
             {
+                if (roster.Count == 0 & rosterOpp.Count != 0) {
+                    Player.instance.setHelth(1);
+                    Debug.Log("Health = "+Player.instance.getHealth().ToString());
+                }
+                    
                 Debug.Log("Game is Finished");
                 SceneManager.LoadScene("ShopUI", LoadSceneMode.Single);
                 return;

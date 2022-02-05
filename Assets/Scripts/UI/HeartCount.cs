@@ -11,5 +11,6 @@ public class HeartCount : MonoBehaviour
     void Update()
     {
         heartCount.text = Player.instance.getHealth().ToString();
+        //Debug.Log(heartCount.text);
     }
 }

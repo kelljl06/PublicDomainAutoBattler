@@ -15,10 +15,18 @@ public class Player : MonoBehaviour
 
     public void Awake()
     {
-        health = 10;
-        DontDestroyOnLoad(this);
-        instance = this;
+        if (instance == null)
+        {
+            DontDestroyOnLoad(this);
+            instance = this;
+            health = 10;
+        }
+        else if (instance != this) { 
+        
+        }
+
     }
+
 
     public List<Pets> getHand()
     {
@@ -48,6 +56,10 @@ public class Player : MonoBehaviour
     public int getHealth()
     {
         return health;
+    }
+
+    public void setHelth(int total) {
+        health = health - total;
     }
 
 
