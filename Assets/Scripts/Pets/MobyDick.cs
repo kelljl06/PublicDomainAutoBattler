@@ -35,6 +35,15 @@ public class MobyDick : Pets
         {
             pet.setSPD(pet.getSPD() - 1);
         }
+
+        Vector3 startPos = this.visualEffect.transform.position;
+        Vector3 grabPos = opponentPets[rand].visualEffect.transform.position;
+
+        bool movingLeft = this.visualEffect.transform.position[0] > 0;
+
+
+        BattleHandler.instance.waveAccrossStream(startPos, movingLeft);
+        BattleHandler.instance.waveAccrossStream(grabPos, movingLeft);
     }
 
 

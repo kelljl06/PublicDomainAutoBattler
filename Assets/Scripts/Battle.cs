@@ -12,7 +12,7 @@ public class Battle : MonoBehaviour
     public bool inTurn = false;
 
     public const int TIRED = 2;
-    public const int DEFAULT_DURATION = 1;
+
 
 
     public void Awake() => instance = this;
@@ -133,7 +133,7 @@ public class Battle : MonoBehaviour
     {
         if (pet1.getHP() <= 0)
         {
-            spawnObjectAbove(Resources.Load("UI/Skull") as GameObject, pet1.visualEffect);
+            BattleHandler.instance.spawnObjectAbove(Resources.Load("UI/Skull") as GameObject, pet1.visualEffect);
             pet1.setATK(0);
             pet1.setHP(0);
             pet1.setSPD(0);            
@@ -145,15 +145,7 @@ public class Battle : MonoBehaviour
         }
     }
 
-    public void spawnObjectAbove(GameObject newThing, GameObject pet, int duration = DEFAULT_DURATION)
-    {
-        newThing = Instantiate(newThing, pet.transform.position + new Vector3(0, 2f, 0), transform.localRotation);
-        StartCoroutine(deleteObjectAbove(duration, newThing));
-    }
-    public IEnumerator deleteObjectAbove(float time, GameObject objectAbove)
-    {
-        yield return new WaitForSeconds(time);
 
-        GameObject.Destroy(objectAbove);
-    }
+
+
 }
