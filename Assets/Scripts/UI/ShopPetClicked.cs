@@ -64,6 +64,10 @@ public class ShopPetClicked : MonoBehaviour
             Clear();
             RemovePet();
             payMoney(unitPrice);
+            ShopSFXHandler.instance.PlayPurchaseAudio();
+        }
+        else {
+            ShopSFXHandler.instance.PlayErrorAudio();
         }
     }
 
