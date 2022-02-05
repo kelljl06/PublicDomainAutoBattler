@@ -36,7 +36,7 @@ public class Jesus : Pets
         this.setATK(this.getATK() + 2);
         this.setHP(this.getHP() + 2);
         GameObject cross = Resources.Load("UI/Cross") as GameObject;
-        BattleHandler.instance.spawnObjectAbove(cross, this.visualEffect);
+        BattleHandler.instance.spawnObjectAbove(cross, this.visualEffect, setParent : true);
 
     }
 

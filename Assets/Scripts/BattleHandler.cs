@@ -266,9 +266,11 @@ public class BattleHandler : MonoBehaviour
         act();
     }
 
-    public void spawnObjectAbove(GameObject newThing, GameObject pet, int duration = DEFAULT_DURATION)
+    public void spawnObjectAbove(GameObject newThing, GameObject pet, int duration = DEFAULT_DURATION, bool setParent = false)
     {
         newThing = Instantiate(newThing, pet.transform.position + new Vector3(0, 2f, 0), transform.localRotation);
+        if (setParent)
+            newThing.transform.SetParent(pet.transform);
         StartCoroutine(deleteObjectAbove(duration, newThing));
     }
     public IEnumerator deleteObjectAbove(float time, GameObject objectAbove)
