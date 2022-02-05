@@ -261,12 +261,6 @@ public class BattleHandler : MonoBehaviour
         act();
     }
 
-    public void moveObject(GameObject newThing, bool movingLeft, Vector3 startPoint)
-    {
-        newThing = Instantiate(newThing, startPoint, transform.localRotation);
-        StartCoroutine(MoveOverSeconds(newThing, newThing.transform.position - new Vector3(0, -10+newThing.transform.position[1]), MOVE_SPEED));
-    }
-
     public void spawnObjectAbove(GameObject newThing, GameObject pet, int duration = DEFAULT_DURATION)
     {
         newThing = Instantiate(newThing, pet.transform.position + new Vector3(0, 2f, 0), transform.localRotation);
@@ -277,5 +271,35 @@ public class BattleHandler : MonoBehaviour
         yield return new WaitForSeconds(time);
 
         GameObject.Destroy(objectAbove);
+    }
+
+    public void waveAccrossStream(Vector3 startPos, bool movingLeft)
+    {
+        StartCoroutine(waveAccrossStream(startPos, movingLeft, 1f));
+    }
+
+
+    public IEnumerator waveAccrossStream(Vector3 startPos, bool movingLeft, float seconds)
+    {
+        
+        GameObject wave = Resources.Load("UI/Wave") as GameObject;
+        wave = Instantiate(wave, startPos, transform.localRotation);
+        float elapsedTime = 0;
+        Vector3 startingPos = wave.transform.position;
+        Vector3 endingPos = new Vector3(12f, -2f, 0);
+        if (movingLeft)
+        {
+            wave.GetComponent<SpriteRenderer>().flipX = true;
+            endingPos = new Vector3(-12f, -2f, 0);
+        }
+            
+            
+        while (elapsedTime < seconds & wave != null)
+        {
+            wave.transform.position = Vector3.Lerp(startingPos, endingPos, (elapsedTime / seconds));
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
     }
 }
