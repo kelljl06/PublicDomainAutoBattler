@@ -29,6 +29,11 @@ public class Winnie : Pets
     {
         otherPet.setSPD(otherPet.getSPD() - 1);
         this.setSPD(this.getSPD() + 1);
+
+        GameObject upArrow = Resources.Load("UI/UpArrowHoney") as GameObject;
+        GameObject downArrow = Resources.Load("UI/DownArrowHoney") as GameObject;
+        BattleHandler.instance.spawnObjectAbove(upArrow, this.visualEffect);
+        BattleHandler.instance.spawnObjectAbove(downArrow, otherPet.visualEffect);
     }
 
 }
