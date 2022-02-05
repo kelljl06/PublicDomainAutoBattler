@@ -25,4 +25,11 @@ public class Frankenstein : Pets
 
     }
 
+    public override void onHit(Pets otherPet, List<Pets> alliedPets, List<Pets> opponentPets)
+    {
+        this.setHP(this.getHP() + this.getATK() + System.Math.Min(0,otherPet.getHP()));
+        GameObject lifeSteal = Resources.Load("UI/LifeSteal") as GameObject;
+        BattleHandler.instance.spawnObjectAbove(lifeSteal, this.visualEffect, setParent: true);
+    }
+
 }
