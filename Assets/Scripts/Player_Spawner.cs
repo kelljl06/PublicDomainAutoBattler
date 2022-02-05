@@ -7,7 +7,6 @@ using System;
 public class Player_Spawner : MonoBehaviour
 {
     public GameObject pet;
-    public GameObject clashOBJ;
     public static Player_Spawner instance;
 
     public void Awake() => instance = this;
@@ -36,9 +35,9 @@ public class Player_Spawner : MonoBehaviour
 
     //This creates the hit picture
     public void createClash() {
-        clashOBJ = Resources.Load("UI/HitImage") as GameObject;
+        GameObject clashOBJ = Resources.Load("UI/HitImage") as GameObject;
         clashOBJ = Instantiate(clashOBJ, new Vector3(0, -2f, 0), transform.localRotation);
-        StartCoroutine(deleteClash(.2f));
+        StartCoroutine(deleteClash(.2f, clashOBJ));
     }
 
     //THis takes a name of a prefab from the pets class and turns it to an object
@@ -79,8 +78,9 @@ public class Player_Spawner : MonoBehaviour
 
 
     //This will delete the clash img object after a certian amount of time
-    public IEnumerator deleteClash(float time)
+    public IEnumerator deleteClash(float time, GameObject clashOBJ)
     {
+        
         yield return new WaitForSeconds(time);
 
         GameObject.Destroy(clashOBJ);
