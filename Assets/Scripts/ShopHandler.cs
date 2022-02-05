@@ -54,11 +54,6 @@ public class ShopHandler : MonoBehaviour
         ShopRefresh();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    
-    }
 
     public void loadPos() {
         Vector3 adjust = new Vector3(0f,.13f, 0f);
