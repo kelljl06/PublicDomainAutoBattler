@@ -19,7 +19,6 @@ public class ShopHandler : MonoBehaviour
     public int orderShop;
     public int orderPlayer;
     public int rand;
-
     public bool firstReroll = true;
 
     Vector3[] shopPositions = {
@@ -28,8 +27,8 @@ public class ShopHandler : MonoBehaviour
         new Vector3 { x = 0f, y = -2, z = 0},
         new Vector3 { x = -3.1f, y = -2, z = 0},
         new Vector3 { x = -6.3f, y = -2, z = 0 },
-
-     };
+        
+};
 
     Vector3[] playerPositions = {
 
@@ -47,6 +46,7 @@ public class ShopHandler : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        loadPos();
     }
     void Start()
     {
@@ -58,6 +58,34 @@ public class ShopHandler : MonoBehaviour
     void Update()
     {
     
+    }
+
+    public void loadPos() {
+        Vector3 adjust = new Vector3(0f,.13f, 0f);
+
+        GameObject posGrab = GameObject.Find("shopPShadow1");
+        playerPositions[0] = posGrab.transform.position + adjust;
+        posGrab = GameObject.Find("shopPShadow2");
+        playerPositions[1] = posGrab.transform.position + adjust;
+        posGrab = GameObject.Find("shopPShadow3");
+        playerPositions[2] = posGrab.transform.position + adjust;
+        posGrab = GameObject.Find("shopPShadow4");
+        playerPositions[3] = posGrab.transform.position + adjust;
+        posGrab = GameObject.Find("shopPShadow5");
+        playerPositions[4] = posGrab.transform.position + adjust;
+
+        posGrab = GameObject.Find("shopEShadow1");
+        shopPositions[0] = posGrab.transform.position + adjust;
+        posGrab = GameObject.Find("shopEShadow2");
+        shopPositions[1] = posGrab.transform.position + adjust;
+        posGrab = GameObject.Find("shopEShadow3");
+        shopPositions[2] = posGrab.transform.position + adjust;
+        posGrab = GameObject.Find("shopEShadow4");
+        shopPositions[3] = posGrab.transform.position + adjust;
+        posGrab = GameObject.Find("shopEShadow5");
+        shopPositions[4] = posGrab.transform.position + adjust;
+
+
     }
 
     public void updateStats(GameObject charac, int ATK, int SPD, int HP)
@@ -79,7 +107,7 @@ public class ShopHandler : MonoBehaviour
         firstReroll = false;
 
         for (int i = 0; 5 > i; i++) {
-            rand = Random.Range(0, 6);
+            rand = Random.Range(0, 13);
             switch (rand) {
                 case 0: 
                     shopPetsClass.Add(new Winnie());
@@ -108,6 +136,30 @@ public class ShopHandler : MonoBehaviour
                 case 6:
                     shopPetsClass.Add(new Bozo());
                     shopPets.Add(createPet(new Bozo().getPrefab(), false));
+                    break;
+                case 7:
+                    shopPetsClass.Add(new Frankenstein());
+                    shopPets.Add(createPet(new Frankenstein().getPrefab(), false));
+                    break;
+                case 8:
+                    shopPetsClass.Add(new GingerbreadMan());
+                    shopPets.Add(createPet(new GingerbreadMan().getPrefab(), false));
+                    break;
+                case 9:
+                    shopPetsClass.Add(new Nessy());
+                    shopPets.Add(createPet(new Nessy().getPrefab(), false));
+                    break;
+                case 10:
+                    shopPetsClass.Add(new TinMan());
+                    shopPets.Add(createPet(new TinMan().getPrefab(), false));
+                    break;
+                case 11:
+                    shopPetsClass.Add(new Lion());
+                    shopPets.Add(createPet(new Lion().getPrefab(), false));
+                    break;
+                case 12:
+                    shopPetsClass.Add(new Scarecrow());
+                    shopPets.Add(createPet(new Scarecrow().getPrefab(), false));
                     break;
             }
             updateStats(shopPets[i], shopPetsClass[i].getATK(), shopPetsClass[i].getSPD(), shopPetsClass[i].getHP());

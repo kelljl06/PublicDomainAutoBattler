@@ -9,11 +9,13 @@ public class Player : MonoBehaviour
     public static List<Pets> PlayerHand = new  List<Pets>();
 
     public int rounds;
+    public int health;
 
     public static Player instance;
 
     public void Awake()
     {
+        health = 10;
         DontDestroyOnLoad(this);
         instance = this;
     }
@@ -37,6 +39,15 @@ public class Player : MonoBehaviour
             PlayerHand.RemoveAt(index);
         PlayerHand.Insert(index, pet);
 
+    }
+
+    public void setHealth(int newHealth) {
+        health = newHealth;
+    }
+
+    public int getHealth()
+    {
+        return health;
     }
 
 
