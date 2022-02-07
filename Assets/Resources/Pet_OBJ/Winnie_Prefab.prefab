@@ -436,6 +436,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7860017803869428560}
   - component: {fileID: 7860017803869428575}
+  - component: {fileID: 869985178760788598}
   m_Layer: 0
   m_Name: Winnie_Prefab
   m_TagString: Untagged
@@ -509,6 +510,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &869985178760788598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7860017803869428574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ee050c9916ae7d4481bb562d3cd9f97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7860017803990433570
 GameObject:
   m_ObjectHideFlags: 0

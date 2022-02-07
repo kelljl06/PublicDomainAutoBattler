@@ -91,6 +91,16 @@ public class BattleHandler : MonoBehaviour
         //Only Battle on Y Key Press
         if (Input.GetKeyDown(KeyCode.Y))
         {
+            foreach (Pets pet in roster)
+            {
+                pet.onRoundStart(pet, roster, rosterOpp);
+            }
+
+            foreach (Pets pet in rosterOpp)
+            {
+                pet.onRoundStart(pet, rosterOpp, roster);
+            }
+
 
             //Don't play if one of teams is empty
             if (roster.Count == 0 | rosterOpp.Count == 0)

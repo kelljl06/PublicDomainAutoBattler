@@ -7,6 +7,9 @@ public class Jesus : Pets
 {
 
     public int[] stats = new int[] { 5, 1, 1, 1 };
+    public const int roundDeadLimit = 3;
+    public int roundDeadCount = 0;
+    public bool hasRespawned = false;
 
     public Jesus() : base()
     {
@@ -28,8 +31,18 @@ public class Jesus : Pets
     public override void onSpawn(List<Pets> alliedPets, List<Pets> opponentPets)
     {
         alliedPets.Remove(this);
-        alliedPets.Add(this);
     }
+
+    public override void onRoundStart(Pets pet, List<Pets> alliedPets, List<Pets> opponentPets)
+    {
+        this.roundDeadCount += 1;
+        if (roundDeadCount >= 3 & !hasRespawned)
+        {
+            alliedPets.Add(this);
+        }
+    }
+
+
 
     public override void onAllyDeath(Pets pet, List<Pets> alliedPets, List<Pets> opponentPets)
     {
