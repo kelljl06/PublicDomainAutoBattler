@@ -66,6 +66,11 @@ public class Pets
         return;
     }
 
+    virtual public void onRoundStart(Pets pet, List<Pets> alliedPets, List<Pets> opponentPets)
+    {
+        return;
+    }
+
     override public string ToString()
     {
         return "("+ID.ToString()+","+ATK.ToString()+","+SPD.ToString()+","+HP.ToString()+")";
