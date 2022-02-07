@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
 
     public int rounds;
     public int health;
+    public string teamName;
 
     public static Player instance;
 
@@ -19,6 +20,7 @@ public class Player : MonoBehaviour
         {
             DontDestroyOnLoad(this);
             instance = this;
+            rounds = 1;
             health = 10;
         }
         else if (instance != this) { 
@@ -61,6 +63,17 @@ public class Player : MonoBehaviour
     public void setHelth(int total) {
         health = health - total;
     }
+
+    public void setTeamName(string name)
+    {
+        teamName = name;
+    }
+
+    public string getTeamName()
+    {
+        return teamName;
+    }
+
 
 
 

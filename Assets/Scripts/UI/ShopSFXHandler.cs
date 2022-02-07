@@ -24,4 +24,8 @@ public class ShopSFXHandler : MonoBehaviour
     public void PlayPurchaseAudio() {
         audio[1].Play();
     }
+    public void PlayRerollAudio()
+    {
+        audio[2].Play();
+    }
 }

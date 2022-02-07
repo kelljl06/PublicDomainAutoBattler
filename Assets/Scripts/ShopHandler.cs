@@ -13,6 +13,8 @@ public class ShopHandler : MonoBehaviour
 
     public List<GameObject> PlayerPets = new List<GameObject>();
 
+    public int shopTier;
+
 
 
     public GameObject pet;
@@ -50,8 +52,34 @@ public class ShopHandler : MonoBehaviour
     }
     void Start()
     {
+        getTier();
         LoadPlayerPets();
         ShopRefresh();
+    }
+
+    public void getTier() {
+        if (Player.instance.rounds < 3)
+        {
+            shopTier = 1;
+        }
+        else if (Player.instance.rounds < 5) 
+        {
+            shopTier = 2;
+        }
+        else if (Player.instance.rounds < 7)
+        {
+            shopTier = 3;
+        }
+        else if (Player.instance.rounds < 9)
+        {
+            shopTier = 4;
+        }
+        //else
+        //{
+        //    shopTier = 5;
+        //}
+
+
     }
 
     public void loadPos() {
@@ -96,45 +124,51 @@ public class ShopHandler : MonoBehaviour
             return;
         ClearShop();
         if (!firstReroll)
+        {
+            ShopSFXHandler.instance.PlayRerollAudio();
             ShopPetClicked.instance.payMoney(ShopPetClicked.instance.rerollPrice);
+        }
 
         firstReroll = false;
 
         for (int i = 0; 5 > i; i++) {
-            rand = Random.Range(0, 13);
+            rand = Random.Range(0, (shopTier*4));
             switch (rand) {
+                //NEW Tier 1
                 case 0: 
                     shopPetsClass.Add(new Winnie());
                     shopPets.Add(createPet(new Winnie().getPrefab(), false));
                     break;
                 case 1:
-                    shopPetsClass.Add(new MobyDick());
-                    shopPets.Add(createPet(new MobyDick().getPrefab(), false));
+                    shopPetsClass.Add(new Scrooge());
+                    shopPets.Add(createPet(new Scrooge().getPrefab(), false));
                     break;
                 case 2:
                     shopPetsClass.Add(new NutCracker());
                     shopPets.Add(createPet(new NutCracker().getPrefab(), false));
                     break;
                 case 3:
-                    shopPetsClass.Add(new Jesus());
-                    shopPets.Add(createPet(new Jesus().getPrefab(), false));
+                    shopPetsClass.Add(new Frankenstein());
+                    shopPets.Add(createPet(new Frankenstein().getPrefab(), false));
                     break;
+                //NEW Tier 2
                 case 4:
                     shopPetsClass.Add(new Tarzan());
                     shopPets.Add(createPet(new Tarzan().getPrefab(), false));
                     break;
                 case 5:
-                    shopPetsClass.Add(new Death());
-                    shopPets.Add(createPet(new Death().getPrefab(), false));
+                    shopPetsClass.Add(new TinMan());
+                    shopPets.Add(createPet(new TinMan().getPrefab(), false));
                     break;
                 case 6:
-                    shopPetsClass.Add(new Bozo());
-                    shopPets.Add(createPet(new Bozo().getPrefab(), false));
+                    shopPetsClass.Add(new Lion());
+                    shopPets.Add(createPet(new Lion().getPrefab(), false));
                     break;
                 case 7:
-                    shopPetsClass.Add(new Frankenstein());
-                    shopPets.Add(createPet(new Frankenstein().getPrefab(), false));
+                    shopPetsClass.Add(new Scarecrow());
+                    shopPets.Add(createPet(new Scarecrow().getPrefab(), false));
                     break;
+                //NEW Tier 3
                 case 8:
                     shopPetsClass.Add(new GingerbreadMan());
                     shopPets.Add(createPet(new GingerbreadMan().getPrefab(), false));
@@ -144,17 +178,32 @@ public class ShopHandler : MonoBehaviour
                     shopPets.Add(createPet(new Nessy().getPrefab(), false));
                     break;
                 case 10:
-                    shopPetsClass.Add(new TinMan());
-                    shopPets.Add(createPet(new TinMan().getPrefab(), false));
+                    shopPetsClass.Add(new Death());
+                    shopPets.Add(createPet(new Death().getPrefab(), false));
                     break;
                 case 11:
-                    shopPetsClass.Add(new Lion());
-                    shopPets.Add(createPet(new Lion().getPrefab(), false));
+                    shopPetsClass.Add(new Bozo());
+                    shopPets.Add(createPet(new Bozo().getPrefab(), false));
                     break;
+                //NEW Tier 4
                 case 12:
-                    shopPetsClass.Add(new Scarecrow());
-                    shopPets.Add(createPet(new Scarecrow().getPrefab(), false));
+                    shopPetsClass.Add(new Jesus());
+                    shopPets.Add(createPet(new Jesus().getPrefab(), false));
                     break;
+                case 13:
+                    shopPetsClass.Add(new Dorothy());
+                    shopPets.Add(createPet(new Dorothy().getPrefab(), false));
+                    break;
+                case 14:
+                    shopPetsClass.Add(new Sherlock());
+                    shopPets.Add(createPet(new Sherlock().getPrefab(), false));
+                    break;
+                case 15:
+                    shopPetsClass.Add(new MobyDick());
+                    shopPets.Add(createPet(new MobyDick().getPrefab(), false));
+                    break;
+                //NEW Tier 5
+
             }
             updateStats(shopPets[i], shopPetsClass[i].getATK(), shopPetsClass[i].getSPD(), shopPetsClass[i].getHP());
         }

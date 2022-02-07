@@ -8,6 +8,7 @@ public class MM_Play_Button : MonoBehaviour
 
 {
     public Button playButton;
+    public InputField teamNameField;
 
     void Start()
     {

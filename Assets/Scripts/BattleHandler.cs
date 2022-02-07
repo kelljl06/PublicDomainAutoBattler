@@ -101,6 +101,7 @@ public class BattleHandler : MonoBehaviour
                 }
                     
                 Debug.Log("Game is Finished");
+                Player.instance.rounds++; 
                 SceneManager.LoadScene("ShopUI", LoadSceneMode.Single);
                 return;
             }
