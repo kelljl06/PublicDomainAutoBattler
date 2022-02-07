@@ -6,7 +6,7 @@ using System.Collections;
 public class Bozo : Pets
 {
 
-    public int[] stats = new int[] { 7, 4, 3, 8 };
+    public int[] stats = new int[] { 7, 5, 3, 8 };
 
     public Bozo() : base()
     {
