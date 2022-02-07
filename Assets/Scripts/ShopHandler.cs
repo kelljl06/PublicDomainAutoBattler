@@ -70,10 +70,13 @@ public class ShopHandler : MonoBehaviour
         {
             shopTier = 3;
         }
-        else if (Player.instance.rounds < 9)
-        {
+        else        {
             shopTier = 4;
         }
+        //else if (Player.instance.rounds < 9)
+        //{
+        //    shopTier = 4;
+        //}
         //else
         //{
         //    shopTier = 5;
