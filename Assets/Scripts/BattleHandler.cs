@@ -17,6 +17,7 @@ public class BattleHandler : MonoBehaviour
     List<Pets> rosterOpp = new List<Pets>();
     List<GameObject> rosterOBJ = new List<GameObject>();
     List<GameObject> opponentOBJ = new List<GameObject>();
+    public List<Pets> deadPets = new List<Pets>();
 
     public void Awake() => instance = this;
 
@@ -84,6 +85,7 @@ public class BattleHandler : MonoBehaviour
         }
         StartCoroutine(waitFor(.5f, movePlayerTeam));
         StartCoroutine(waitFor(.5f, moveOppTeam));
+
     }
     void Update()
     {
@@ -91,15 +93,27 @@ public class BattleHandler : MonoBehaviour
         //Only Battle on Y Key Press
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            foreach (Pets pet in roster)
+            Pets[] tempRoster = new Pets[roster.Count];
+            Pets[] tempOppRoster = new Pets[rosterOpp.Count];
+            Pets[] tempDeadPets = new Pets[deadPets.Count];
+            roster.CopyTo(tempRoster);
+            rosterOpp.CopyTo(tempOppRoster);
+            deadPets.CopyTo(tempDeadPets);
+            foreach (Pets pet in tempRoster)
             {
-                pet.onRoundStart(pet, roster, rosterOpp);
+                pet.onRoundStart(roster, rosterOpp);
             }
 
-            foreach (Pets pet in rosterOpp)
+            foreach (Pets pet in tempOppRoster)
             {
-                pet.onRoundStart(pet, rosterOpp, roster);
+                pet.onRoundStart(rosterOpp, roster);
             }
+
+            foreach (Pets pet in tempDeadPets)
+            {
+                pet.onRoundStart(roster, rosterOpp);
+            }
+
 
 
             //Don't play if one of teams is empty

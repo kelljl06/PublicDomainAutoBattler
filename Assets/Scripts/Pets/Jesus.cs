@@ -31,14 +31,23 @@ public class Jesus : Pets
     public override void onSpawn(List<Pets> alliedPets, List<Pets> opponentPets)
     {
         alliedPets.Remove(this);
+        BattleHandler.instance.StartCoroutine(BattleHandler.instance.MoveOverSeconds(this.visualEffect, this.visualEffect.transform.position + new Vector3(0, 10f, 0), 2f));
+        BattleHandler.instance.deadPets.Add(this);
     }
 
-    public override void onRoundStart(Pets pet, List<Pets> alliedPets, List<Pets> opponentPets)
+    public override void onRoundStart(List<Pets> alliedPets, List<Pets> opponentPets)
     {
         this.roundDeadCount += 1;
+        Debug.Log(this.roundDeadCount);
         if (roundDeadCount >= 3 & !hasRespawned)
         {
-            alliedPets.Add(this);
+            if (this.visualEffect.transform.position[0] > 0)
+                opponentPets.Add(this);
+            else
+                alliedPets.Add(this);
+
+            hasRespawned = true;
+            BattleHandler.instance.deadPets.Remove(this);
         }
     }
 

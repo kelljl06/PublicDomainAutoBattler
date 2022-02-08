@@ -66,7 +66,7 @@ public class Pets
         return;
     }
 
-    virtual public void onRoundStart(Pets pet, List<Pets> alliedPets, List<Pets> opponentPets)
+    virtual public void onRoundStart(List<Pets> alliedPets, List<Pets> opponentPets)
     {
         return;
     }
